@@ -437,6 +437,9 @@ html.intro-en-cours, html.intro-en-cours body { overflow: hidden; }
 .intro__page--d { clip-path: inset(0 0 0 50%); background: linear-gradient(90deg, #E4D8C4 50%, #F3ECDF 54%, #F7F2E8 100%); }
 .intro__pli { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: rgba(46, 27, 19, .14); box-shadow: 0 0 24px 6px rgba(46, 27, 19, .08); }
 .intro__contenu { width: min(88vw, 900px); text-align: center; }
+/* Le logo complet de Vanessa, à la place de la phrase, avant que le livre s'ouvre (17/11) : même case de grille, centré */
+.intro__page > .intro__contenu, .intro__page > .intro__logo { grid-area: 1 / 1; }
+.intro__logo { width: min(64vmin, 360px); height: auto; }
 .intro__citation { font: italic 400 clamp(1.6rem, 3.6vw, 3.1rem)/1.35 var(--serif); margin: 0 0 .5em; color: var(--espresso); }
 .intro__citation span { display: inline-block; }
 .intro__jamais { font: italic 400 clamp(2.6rem, 6vw, 5rem)/1 var(--serif); color: var(--cuivre); margin: 0 0 .9em; }

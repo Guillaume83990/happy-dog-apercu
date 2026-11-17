@@ -109,7 +109,9 @@
         '<p class="intro__citation"><span>' + T.citation[0] + '</span> <span>' + T.citation[1] + '</span></p>' +
         '<p class="intro__jamais">' + T.jamais + '</p>' +
         '<p class="intro__signe">Vanessa Vanlerberghe · <cite lang="fr">Nos chiens, ces héros</cite></p>' +
-      '</div>';
+      '</div>' +
+      // Puis son logo complet, celui qu'elle a validé (anneau « Nos chiens, ces héros / Vos chiens, ces héros »), en grand et lisible (17/11)
+      '<img class="intro__logo" src="/happy-dog-apercu/assets/img/logo-happy-dog.svg" width="1395" height="1395" alt="">';
     el.innerHTML =
       '<div class="intro__page intro__page--g">' + contenu + '</div>' +
       '<div class="intro__page intro__page--d">' + contenu + '</div>' +
@@ -118,14 +120,18 @@
 
     tl = gsap.timeline({ onComplete: finir });
     // Rythme de lecture (demande de Guillaume, 16/11) : chaque ligne a le temps d'être lue, puis on laisse respirer
-    var OUVRE = 5.9;
+    // 17/11 : la phrase s'efface et laisse place au logo complet, puis le livre s'ouvre sur le site
+    var LOGO = 5.25, OUVRE = 7.3;
+    gsap.set('.intro__logo', { opacity: 0, scale: .9 });
     tl.from('.intro__citation span', { opacity: 0, y: 16, filter: 'blur(6px)', duration: 1.2, ease: 'power3.out',
         // les deux pages portent la même phrase : chaque ligne apparaît en même temps à gauche et à droite
         stagger: function (i, cible) { return Array.prototype.indexOf.call(cible.parentNode.children, cible) * 1.1; } }, .3)
       .from('.intro__jamais', { opacity: 0, letterSpacing: '.35em', duration: 1.2, ease: 'power3.out' }, 2.9)
       .from('.intro__signe', { opacity: 0, y: 8, duration: .9, ease: 'power2.out' }, 3.7)
+      .to('.intro__contenu', { opacity: 0, y: -10, filter: 'blur(4px)', duration: .7, ease: 'power2.in' }, LOGO - .35)
+      .to('.intro__logo', { opacity: 1, scale: 1, duration: 1.1, ease: 'power3.out' }, LOGO)
       .call(sortie, null, OUVRE + .25)
-      .to('.intro__pli', { opacity: 0, duration: .4 }, OUVRE)
+      .to('.intro__pli', { opacity: 0, duration: .6 }, LOGO) // le pli ne coupe pas le logo en deux
       .to('.intro__page--g', { xPercent: -100, rotationY: 18, transformOrigin: '0% 50%', duration: 1.4, ease: 'power3.inOut' }, OUVRE)
       .to('.intro__page--d', { xPercent: 100, rotationY: -18, transformOrigin: '100% 50%', duration: 1.4, ease: 'power3.inOut' }, OUVRE)
       .to(passer, { opacity: 0, duration: .3 }, OUVRE);
