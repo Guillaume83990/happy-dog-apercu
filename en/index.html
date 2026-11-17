@@ -87,7 +87,7 @@
   </div>
 </header>
 
-<div class="menu-mobile" id="menu-mobile" data-menu-mobile hidden>
+<div class="menu-mobile" id="menu-mobile" data-menu-mobile data-lenis-prevent hidden>
   <nav aria-label="Menu">
     <a href="/happy-dog-apercu/en/">Home</a>
     <p class="menu-mobile__groupe">Training &amp; behaviour</p>
@@ -437,7 +437,7 @@
 <!-- ========== CRM POP-UP (content managed by Vanessa from her private space; demo example here) ========== -->
 <div class="popup" data-popup hidden>
   <div class="popup__fond" data-fermer-popup></div>
-  <div class="popup__boite" role="dialog" aria-modal="true" aria-labelledby="popup-titre">
+  <div class="popup__boite" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="popup-titre">
     <button type="button" class="popup__fermer" data-fermer-popup aria-label="Close">×</button>
     <img class="popup__scene" src="/happy-dog-apercu/assets/img/logo-scene.svg" width="742" height="537" alt="" loading="lazy">
     <p class="surtitre" data-popup-surtitre>Question of the month</p>
