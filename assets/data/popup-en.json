@@ -1,0 +1,8 @@
+{
+  "actif": true,
+  "_note": "EXAMPLE for the demo. Vanessa will fill this file from her private space (question, giveaway or current offer).",
+  "bouton": "A question for you",
+  "surtitre": "Question of the month",
+  "titre": "Your biggest challenge with your dog right now?",
+  "choix": ["Barking", "Recall", "Walking on the lead", "When I leave the house", "Something else"]
+}

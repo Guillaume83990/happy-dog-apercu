@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page en préparation · Happy Dog Saint-Tropez</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/happy-dog-apercu/assets/img/favicon.svg">
+<link rel="stylesheet" href="/happy-dog-apercu/assets/css/style.css">
+</head>
+<body>
+<main class="question page-404">
+  <img class="page-404__scene" src="/happy-dog-apercu/assets/img/logo-scene.svg" width="742" height="537" alt="">
+  <p class="surtitre surtitre--clair">Happy Dog Saint-Tropez</p>
+  <h1 class="question__titre">Cette page arrive <em>très bientôt.</em></h1>
+  <p class="question__intro" lang="en">This page is coming very soon.</p>
+  <div class="question__actions">
+    <a class="bouton bouton--cuivre" href="/happy-dog-apercu/">Retour à l'accueil</a>
+    <a class="bouton bouton--contour-clair" href="https://wa.me/33620708873">Écrire sur WhatsApp</a>
+  </div>
+</main>
+<script>
+(function(){
+  var faites=["/happy-dog-apercu/","/happy-dog-apercu/en/"];
+  var en=document.documentElement.lang==='en';
+  var bulle;
+  function annoncer(){
+    if(!bulle){bulle=document.createElement('div');bulle.setAttribute('role','status');
+      bulle.style.cssText='position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:10000;background:#2e1b13;color:#f4ead8;font:500 14px/1.4 system-ui,sans-serif;padding:12px 18px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.3);max-width:88vw;text-align:center;transition:opacity .3s';
+      document.body.appendChild(bulle);}
+    bulle.textContent=en?'This page is coming soon: only the home page is ready in this preview.':'Cette page arrive bientôt : seul l\'accueil est prêt dans cet aperçu.';
+    bulle.style.opacity='1';clearTimeout(bulle._t);bulle._t=setTimeout(function(){bulle.style.opacity='0';},2600);
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;
+    var u=new URL(a.href,location.href);
+    if(u.origin!==location.origin||u.hash&&u.pathname===location.pathname)return;
+    if(faites.indexOf(u.pathname)===-1){e.preventDefault();annoncer();}
+  },true);
+})();
+</script>
+</body>
+</html>
