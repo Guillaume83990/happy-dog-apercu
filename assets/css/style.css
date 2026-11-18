@@ -1,5 +1,5 @@
 /* Happy Dog Saint-Tropez · happydogsainttropez.com · Sud Web Project · 16/11/2026
-   Tons espresso choisis par Vanessa au RDV du 16/11 : espresso, crème, sable, cuivre ; Lora + Poppins.
+   18/11 : passé en tons CLAIRS à la demande de Vanessa (crème, beige #EBE9D4 et brun prune #51383B de sa carte et de son flyer) ; Lora + Poppins.
    Règle SWP : aucun script ni attribut on… dans les pages (CSP stricte). */
 
 @font-face { font-family: "Lora"; src: url("../fonts/lora-v37-latin-regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
@@ -10,18 +10,20 @@
 @font-face { font-family: "Poppins"; src: url("../fonts/poppins-v24-latin-500.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
 
 :root {
-  --espresso: #2E1B13;
-  --espresso-2: #3A2519;
-  --espresso-3: #47301F;
-  --creme: #F7F2E8;
-  --sable: #E9DECB;
-  --sable-2: #DCCDB4;
+  /* 18/11 : Vanessa veut plus clair, plus aéré, plus épuré → les teintes de SA carte et de SON flyer :
+     brun prune #51383B (titres, pied de page) et beige #EBE9D4 (bandes) ; fond crème très clair. Cuivre gardé en accent. */
+  --espresso: #51383B;
+  --espresso-2: #5E4447;
+  --espresso-3: #6B5053;
+  --creme: #FAF8F2;
+  --sable: #EEECDD;
+  --sable-2: #DEDAC5;
   --cuivre: #B5793F;
   --cuivre-clair: #D19A63;
   --cuivre-texte: #8F5A28;   /* petits textes cuivre sur fond clair (contraste AA) */
   --cuivre-bouton: #9E652F;  /* fond des boutons, texte blanc lisible (AA) */
-  --texte: #4A3A30;
-  --doux: #7A6555;
+  --texte: #5A4749;
+  --doux: #7E6C6E;
   --creme-doux: rgba(247, 242, 232, .72);
   --serif: "Lora", Georgia, "Times New Roman", serif;
   --sans: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -93,11 +95,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .marque__rond { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; border: 1.5px solid #B26524; flex-shrink: 0; padding-top: 1px; } /* cuivre du logo validé (17/11) */
 .marque__scene { width: 40px; height: auto; }
 .pied__logo { display: block; width: clamp(150px, 15vw, 190px); height: auto; margin: -10px 0 18px -6px; }
-/* 17/11 : le logo complet validé par Vanessa (anneau « Nos chiens, ces héros »), grand en haut de page, réduit quand l'en-tête se colle */
-.marque__logo { display: block; width: 112px; height: auto; margin: 30px 0 -30px -12px; filter: drop-shadow(0 3px 12px rgba(20, 10, 6, .45));
-  border-radius: 50%; background: radial-gradient(circle, rgba(46, 27, 19, .72) 0 42%, rgba(46, 27, 19, .38) 52%, transparent 66%); /* lisible même sur le ciel de la photo (téléphone) */
-  transition: width .5s var(--ease), margin .5s var(--ease); }
-.entete-site.est-colle .marque__logo { width: 70px; margin: 0 0 0 -8px; }
 .marque__texte { display: flex; flex-direction: column; line-height: 1; }
 .marque__nom { font: 500 1.06rem/1 var(--sans); letter-spacing: .14em; color: var(--creme); margin: 0; }
 .marque__lieu { font: 400 .62rem/1 var(--sans); letter-spacing: .34em; text-transform: uppercase; color: var(--cuivre-clair); margin: 6px 0 0; }
@@ -379,8 +376,6 @@ body.popup-ouverte { overflow: hidden; }
   :root { --entete-h: 68px; }
   .marque__rond { width: 48px; height: 48px; }
   .marque__rond .marque__scene { width: 34px; }
-  .marque__logo { width: 84px; margin: 18px 0 -18px -10px; }
-  .entete-site.est-colle .marque__logo { width: 60px; margin: 0 0 0 -8px; }
   .marque__nom { font-size: .95rem; }
   .reseaux { display: none; }
   .langues { font-size: .72rem; gap: 6px; }
@@ -550,7 +545,7 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: clip; }
 /* la photo d'ouverture dépasse un peu de son cadre pour pouvoir glisser (parallaxe) sans laisser de vide */
-.ouverture__photo img { top: -12%; bottom: auto; height: 124%; }
+.ouverture__photo img { top: -4%; bottom: auto; height: 114%; } /* 18/11 : photo du flyer en paysage, moins agrandie pour garder son visage et Bahia */
 /* Ce qui vous amène : le trait de chaque ligne se dessine */
 .sujets__liste li { position: relative; --trait: 1; border-top-color: transparent; }
 .sujets__liste li::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: rgba(247, 242, 232, .16); transform: scaleX(var(--trait)); transform-origin: left; }
@@ -596,3 +591,160 @@ html.lenis, html.lenis body { height: auto; }
   .ruban.est-double .ruban__piste { animation: none; }
   .ruban__piste li[aria-hidden="true"] { display: none; }
 }
+
+/* =====================================================================
+   THÈME CLAIR (18/11/2026, retours de Vanessa) : plus clair, plus de liberté, plus aéré, épuré.
+   Toutes les zones sombres passent en crème ou en beige ; seul le pied de page reste prune
+   (comme le bandeau de son flyer), avec son logo. Le nom dans l'en-tête est écrit comme sur la maquette.
+   ===================================================================== */
+/* En-tête */
+.entete-site { color: var(--espresso); }
+.entete-site.est-colle { background: rgba(250, 248, 242, .95); box-shadow: 0 1px 0 rgba(81, 56, 59, .1); }
+@supports (backdrop-filter: blur(8px)) { .entete-site.est-colle { background: rgba(250, 248, 242, .82); backdrop-filter: blur(14px); } }
+.marque__nom { font: 400 1.18rem/1 var(--serif); letter-spacing: .34em; color: var(--espresso); }
+.marque__lieu { font: italic 400 .86rem/1 var(--serif); letter-spacing: 0; text-transform: none; color: var(--cuivre-texte); margin: 6px 0 0; }
+.nav__lien { color: var(--espresso); }
+.nav__lien::after { background: var(--cuivre); }
+.langues__actif { color: var(--espresso); }
+.langues__lien { color: var(--doux); }
+.langues__lien:hover { color: var(--cuivre-texte); }
+.reseau { color: var(--espresso); }
+.reseau:hover { background: rgba(81, 56, 59, .06); color: var(--cuivre-texte); }
+.burger span { background: var(--espresso); }
+.menu-mobile { background: var(--creme); color: var(--espresso); }
+.menu-mobile nav a { border-bottom-color: rgba(81, 56, 59, .1); }
+.menu-mobile nav a.menu-mobile__sous { color: var(--doux); }
+.menu-mobile__groupe, .lien-reseau { color: var(--cuivre-texte); }
+
+/* Boutons à contour : prune sur fond clair */
+.bouton--contour-clair { border-color: rgba(81, 56, 59, .3); color: var(--espresso); }
+.bouton--contour-clair:hover { background: var(--espresso); border-color: var(--espresso); color: var(--creme); }
+.titre-section--clair { color: var(--espresso); }
+.titre-section--clair em { color: var(--cuivre-texte); }
+.surtitre--clair { color: var(--cuivre-texte); }
+.etoiles { color: var(--cuivre); }
+
+/* 1. Ouverture : fond crème, la photo sans voile sombre */
+.ouverture { background: var(--creme); color: var(--texte); }
+.ouverture__photo::after { background: linear-gradient(90deg, rgba(250, 248, 242, .5), transparent 12%); }
+.ouverture__metier { color: var(--cuivre-texte); }
+.ouverture__accroche { color: var(--espresso); }
+.ouverture__accroche em { color: var(--cuivre); }
+.ouverture__intro { color: var(--texte); }
+.ouverture__note { color: var(--doux); }
+.ouverture__note strong { color: var(--espresso); }
+.audio { border-color: rgba(181, 121, 63, .4); background: rgba(181, 121, 63, .06); }
+.audio:hover { background: rgba(181, 121, 63, .12); }
+.audio__titre { color: var(--espresso); }
+.audio__detail { color: var(--doux); }
+
+/* 3 bis. La voir travailler */
+.travail { background: var(--sable); color: var(--texte); }
+.travail__intro { color: var(--texte); }
+.video__cadre { background: var(--sable-2); box-shadow: 0 40px 70px -45px rgba(81, 56, 59, .45); }
+.video:hover .video__cadre { box-shadow: 0 50px 80px -45px rgba(81, 56, 59, .55); }
+.video__attente { background: radial-gradient(120% 80% at 50% 30%, #F6F3E7 0%, var(--sable) 60%, var(--sable-2) 100%); }
+.video__brief { color: var(--espresso); }
+.video__num, .travail__glisser { color: var(--cuivre-texte); }
+.video figcaption h3 { color: var(--espresso); }
+.video figcaption p { color: var(--doux); }
+
+/* 4. Accompagnements : la carte « visio » n'est plus sombre */
+.carte--sombre { background: var(--sable); border-color: var(--sable-2); }
+.carte--sombre h3, .carte--sombre .carte__lien { color: var(--espresso); }
+.carte--sombre p { color: var(--doux); }
+.carte--sombre .carte__num { color: var(--cuivre-texte); }
+
+/* 5. Ce qui vous amène */
+.sujets { background: var(--sable); color: var(--texte); }
+.sujets__liste li { border-top-color: rgba(81, 56, 59, .13); }
+.sujets__liste li:last-child { border-bottom-color: rgba(81, 56, 59, .13); }
+.sujets__liste span { color: var(--cuivre-texte); }
+.sujets__liste h3 { color: var(--espresso); }
+.sujets__liste p { color: var(--texte); }
+
+/* 8. Le livre : la photo de son flyer à la place de la couverture */
+.livre { background: var(--sable); color: var(--texte); }
+.livre__visuel { justify-self: stretch; perspective: none; }
+.livre__photo { margin: 0; border-radius: 24px; overflow: hidden; box-shadow: 0 40px 80px -50px rgba(81, 56, 59, .5); }
+.livre__photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 35%; }
+.livre__visuel { max-width: 440px; justify-self: center; width: 100%; }
+/* accueil : la photo du flyer cadrée sur Vanessa et Bahia (le chien à gauche, elle à droite) */
+.ouverture__photo img { object-position: 58% 0%; }
+@media (min-width: 901px) { .ouverture { grid-template-columns: .9fr 1.1fr; } } /* la photo du flyer (paysage) a plus de place pour montrer Vanessa ET Bahia */
+@media (max-width: 900px) { .ouverture__photo img { object-position: 62% 0%; } } /* téléphone : son visage et la tête de Bahia */
+.livre__texte > p { color: var(--texte); }
+.livre__phrase { color: var(--espresso) !important; }
+.livre__phrase em { color: var(--cuivre-texte); }
+.livre__infos { color: var(--doux); }
+
+/* 10. La question */
+.question { background: var(--creme); color: var(--texte); border-top: 1px solid var(--sable-2); }
+.question__titre { color: var(--espresso); }
+.question__titre em { color: var(--cuivre); }
+.question__intro { color: var(--texte); }
+
+/* Pied de page : prune, comme le bandeau de son flyer (son logo y reste) */
+.pied { background: var(--espresso); color: rgba(250, 248, 242, .78); }
+.pied a:hover { color: #fff; }
+
+@media (max-width: 900px) {
+  .marque__nom { font-size: 1rem; letter-spacing: .28em; }
+  .marque__lieu { font-size: .8rem; }
+  /* la photo commence sous l'en-tête (le nom et les boutons sur le crème, pas sur son visage),
+     et son bas se fond dans le crème pour que le petit titre se lise */
+  .ouverture { padding-top: var(--entete-h); }
+  .ouverture__photo::after { background: linear-gradient(0deg, var(--creme) 0%, rgba(250, 248, 242, .88) 16%, rgba(250, 248, 242, 0) 46%); }
+  .barre-mobile { background: rgba(81, 56, 59, .96); }
+}
+
+/* =====================================================================
+   EN-TÊTE SUR DEUX LIGNES (18/11, retours de Vanessa) : fond crème plein, toujours lisible ;
+   ligne 1 : langues en toutes lettres | le nom centré | réseaux + question ; ligne 2 : le menu centré.
+   La photo d'accueil commence sous l'en-tête (sa tête n'est plus coupée).
+   ===================================================================== */
+:root { --entete-h: 126px; }
+.entete-site, .entete-site.est-colle {
+  display: block; height: auto; padding: 0 var(--marge);
+  background: rgba(250, 248, 242, .97); box-shadow: 0 1px 0 rgba(81, 56, 59, .09); backdrop-filter: none;
+}
+.entete-site__haut { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 80px; transition: height .5s var(--ease); }
+.entete-site.est-colle .entete-site__haut { height: 62px; }
+.entete-site .langues { justify-self: start; display: flex; align-items: center; gap: 10px; font: 400 .8rem/1 var(--serif); letter-spacing: .04em; }
+.langues__actif { color: var(--espresso); }
+.langues__sep { color: var(--sable-2); }
+.marque { justify-self: center; }
+.marque__texte { align-items: center; text-align: center; }
+.marque__nom { font-size: 1.5rem; letter-spacing: .42em; margin-right: -.42em; } /* l'espacement final compensé : le nom reste bien centré */
+.marque__lieu { font-size: .95rem; margin-top: 7px; }
+.entete-site__actions { justify-self: end; margin-left: 0; }
+.nav { justify-content: center; margin: 0; height: 46px; gap: clamp(26px, 3.4vw, 54px); border-top: 1px solid rgba(81, 56, 59, .08); }
+.nav__sous { top: calc(100% + 12px); }
+/* L'ouverture commence sous l'en-tête ; la photo n'est plus agrandie vers le haut */
+.ouverture { padding-top: var(--entete-h); }
+.ouverture__texte { padding-top: clamp(28px, 5vh, 64px); }
+.ouverture__photo img { top: 0; height: 110%; }
+
+@media (max-width: 1180px) {
+  :root { --entete-h: 80px; }
+  .entete-site .langues { display: none; } /* tablette et téléphone : le choix de la langue est dans le menu */
+  .entete-site__haut { grid-template-columns: 1fr auto; }
+  .marque { justify-self: start; }
+  .marque__texte { align-items: flex-start; text-align: left; }
+  .marque__nom { font-size: 1.2rem; letter-spacing: .34em; margin-right: 0; }
+  .marque__lieu { font-size: .86rem; }
+}
+@media (max-width: 900px) {
+  :root { --entete-h: 68px; }
+  .entete-site__haut, .entete-site.est-colle .entete-site__haut { height: 68px; }
+  .marque__nom { font-size: 1rem; letter-spacing: .28em; }
+  .marque__lieu { font-size: .8rem; margin-top: 5px; }
+  .ouverture__texte { padding-top: 0; }
+}
+/* 18/11 : tout ce qu'elle est, sous son métier (ses propres mots : « psychologue de formation ») */
+.ouverture__titres { display: block; margin-top: .55em; font-weight: 400; letter-spacing: .16em; color: var(--doux); }
+@media (min-width: 901px) {
+  .ouverture__accroche { font-size: clamp(2.6rem, min(5vw, 8.2vh), 5.4rem); }
+  .ouverture__metier { letter-spacing: .16em; }
+}
+@media (max-width: 900px) { .ouverture__photo::after { inset: 0 0 -2px; } } /* pas de fin trait sous la photo */

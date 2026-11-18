@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://www.happydogsainttropez.com/assets/img/og-happy-dog.jpg">
 <link rel="preload" href="/happy-dog-apercu/assets/fonts/lora-v37-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/happy-dog-apercu/assets/fonts/poppins-v24-latin-300.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="/happy-dog-apercu/assets/img/vanessa-rochers-820.webp" imagesrcset="/happy-dog-apercu/assets/img/vanessa-rochers-520.webp 520w, /happy-dog-apercu/assets/img/vanessa-rochers-820.webp 820w, /happy-dog-apercu/assets/img/vanessa-rochers-1229.webp 1229w" imagesizes="(max-width: 900px) 100vw, 46vw" fetchpriority="high">
+<link rel="preload" as="image" href="/happy-dog-apercu/assets/img/vanessa-flyer-1600.webp" imagesrcset="/happy-dog-apercu/assets/img/vanessa-flyer-960.webp 960w, /happy-dog-apercu/assets/img/vanessa-flyer-1600.webp 1600w, /happy-dog-apercu/assets/img/vanessa-flyer-2400.webp 2400w" imagesizes="(max-width: 900px) 100vw, 46vw" fetchpriority="high">
 <link rel="stylesheet" href="/happy-dog-apercu/assets/css/style.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
@@ -49,9 +49,31 @@
 
 <!-- ========== EN-TÊTE ========== -->
 <header class="entete-site" data-entete>
-  <a class="marque" href="/happy-dog-apercu/" aria-label="Happy Dog Saint-Tropez, retour à l'accueil">
-    <img class="marque__logo" src="/happy-dog-apercu/assets/img/logo-happy-dog-fond-sombre.svg" width="1395" height="1395" alt=""><!-- logo complet validé par Vanessa (17/11) -->
-  </a>
+  <!-- 18/11 : en-tête sur deux lignes (retour de Vanessa : pas tout sur la même ligne) -->
+  <div class="entete-site__haut">
+    <div class="langues" aria-label="Langue du site">
+      <span class="langues__actif" aria-current="true">Français</span>
+      <span class="langues__sep" aria-hidden="true">·</span>
+      <a class="langues__lien" href="/happy-dog-apercu/en/" hreflang="en" lang="en" title="English version">English</a>
+    </div>
+    <a class="marque" href="/happy-dog-apercu/" aria-label="Happy Dog Saint-Tropez, retour à l'accueil">
+      <span class="marque__texte"><span class="marque__nom">HAPPY DOG</span><span class="marque__lieu">Saint-Tropez</span></span><!-- 18/11 : demande de Vanessa, le nom comme sur la maquette ; son logo reste dans le pied de page -->
+    </a>
+    <div class="entete-site__actions">
+      <div class="reseaux">
+        <a class="reseau" href="https://www.instagram.com/happydogsainttropez/" target="_blank" rel="noopener" aria-label="Instagram de Happy Dog Saint-Tropez (nouvel onglet)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle class="plein" cx="17.4" cy="6.6" r="1.1"/></svg>
+        </a>
+        <a class="reseau" href="https://www.facebook.com/vanessa.vanlerberghe.35/" target="_blank" rel="noopener" aria-label="Facebook de Vanessa (nouvel onglet)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="plein" d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3.1z"/></svg>
+        </a>
+      </div>
+      <button type="button" class="bouton-popup" data-ouvrir-popup aria-haspopup="dialog">
+        <span class="bouton-popup__point" aria-hidden="true"></span><span data-popup-etiquette>Une question pour vous</span>
+      </button>
+      <button type="button" class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile" data-burger><span></span><span></span></button>
+    </div>
+  </div>
 
   <nav class="nav" aria-label="Navigation principale">
     <div class="nav__groupe" data-sous-menu>
@@ -66,25 +88,6 @@
     <a class="nav__lien" href="/happy-dog-apercu/coaching-canin-visio/">Coach en visio</a>
     <a class="nav__lien" href="/happy-dog-apercu/conferences-livre-nos-chiens-ces-heros/">Conférencière</a>
   </nav>
-
-  <div class="entete-site__actions">
-    <div class="langues" aria-label="Langue du site">
-      <span class="langues__actif" aria-current="true">FR</span>
-      <a class="langues__lien" href="/happy-dog-apercu/en/" hreflang="en" lang="en" title="English version">EN</a>
-    </div>
-    <div class="reseaux">
-      <a class="reseau" href="https://www.instagram.com/happydogsainttropez/" target="_blank" rel="noopener" aria-label="Instagram de Happy Dog Saint-Tropez (nouvel onglet)">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle class="plein" cx="17.4" cy="6.6" r="1.1"/></svg>
-      </a>
-      <a class="reseau" href="https://www.facebook.com/vanessa.vanlerberghe.35/" target="_blank" rel="noopener" aria-label="Facebook de Vanessa (nouvel onglet)">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path class="plein" d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21h3.1z"/></svg>
-      </a>
-    </div>
-    <button type="button" class="bouton-popup" data-ouvrir-popup aria-haspopup="dialog">
-      <span class="bouton-popup__point" aria-hidden="true"></span><span data-popup-etiquette>Une question pour vous</span>
-    </button>
-    <button type="button" class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile" data-burger><span></span><span></span></button>
-  </div>
 </header>
 
 <div class="menu-mobile" id="menu-mobile" data-menu-mobile data-lenis-prevent hidden>
@@ -111,7 +114,7 @@
   <!-- ========== 1. OUVERTURE ========== -->
   <section class="ouverture" aria-labelledby="titre-page">
     <div class="ouverture__texte">
-      <h1 id="titre-page" class="ouverture__metier" data-apparition>Éducatrice comportementaliste canine à Saint-Tropez</h1>
+      <h1 id="titre-page" class="ouverture__metier" data-apparition>Éducatrice comportementaliste canine à Saint-Tropez<span class="ouverture__titres">Psychologue de formation · Auteur · Conférencière</span></h1>
       <p class="ouverture__accroche" data-titre-anime>Un chien n'arrive jamais <em>par hasard.</em></p>
       <p class="ouverture__intro" data-apparition>Je vous accompagne, vous et votre chien, pour comprendre ce qui se joue entre vous et construire un lien qui vous fait grandir tous les deux. À Saint-Tropez, dans tout le Golfe, et partout dans le monde en visio.</p>
 
@@ -136,10 +139,10 @@
     </div>
 
     <figure class="ouverture__photo" data-photo>
-      <img src="/happy-dog-apercu/assets/img/vanessa-rochers-820.webp"
-           srcset="/happy-dog-apercu/assets/img/vanessa-rochers-520.webp 520w, /happy-dog-apercu/assets/img/vanessa-rochers-820.webp 820w, /happy-dog-apercu/assets/img/vanessa-rochers-1229.webp 1229w"
-           sizes="(max-width: 900px) 100vw, 46vw" width="820" height="1143" fetchpriority="high"
-           alt="Vanessa Vanlerberghe et son Berger Australien sur les rochers du Golfe de Saint-Tropez, au coucher du soleil">
+      <img src="/happy-dog-apercu/assets/img/vanessa-flyer-1600.webp"
+           srcset="/happy-dog-apercu/assets/img/vanessa-flyer-960.webp 960w, /happy-dog-apercu/assets/img/vanessa-flyer-1600.webp 1600w, /happy-dog-apercu/assets/img/vanessa-flyer-2400.webp 2400w"
+           sizes="(max-width: 900px) 100vw, 64vw" width="1600" height="1067" fetchpriority="high"
+           alt="Vanessa Vanlerberghe tend une friandise à Bahia, son Berger Australien, sur un bateau à Saint-Tropez"><!-- 18/11 : la photo de son flyer, sa marque (demande de Vanessa) -->
     </figure>
   </section>
 
@@ -147,7 +150,7 @@
   <section class="preuves" aria-label="En bref">
     <ul>
       <li><strong>5,0 <span aria-hidden="true">★</span></strong><span>106 avis Google</span></li>
-      <li><strong>Auteure</strong><span><cite>Nos chiens, ces héros</cite></span></li>
+      <li><strong>Auteur</strong><span><cite>Nos chiens, ces héros</cite></span></li>
       <li><strong>En visio</strong><span>où que vous soyez</span></li>
       <li><strong>À domicile</strong><span>dans les 12 communes du Golfe</span></li>
     </ul>
@@ -341,16 +344,16 @@
     </ul>
   </section>
 
-  <!-- ========== 8. AUTEURE ET CONFÉRENCIÈRE ========== -->
+  <!-- ========== 8. AUTEUR ET CONFÉRENCIÈRE ========== -->
   <section class="livre" aria-labelledby="livre-titre">
     <div class="livre__visuel" data-livre>
-      <img class="livre__couverture" src="/happy-dog-apercu/assets/img/livre-couverture-520.webp"
-           srcset="/happy-dog-apercu/assets/img/livre-couverture-520.webp 520w, /happy-dog-apercu/assets/img/livre-couverture-926.webp 926w"
-           sizes="(max-width: 900px) 62vw, 26vw" width="520" height="786" loading="lazy" decoding="async"
-           alt="Couverture du livre Nos chiens, ces héros, de Vanessa Vanlerberghe">
+      <figure class="livre__photo"><img src="/happy-dog-apercu/assets/img/vanessa-rochers-820.webp"
+           srcset="/happy-dog-apercu/assets/img/vanessa-rochers-520.webp 520w, /happy-dog-apercu/assets/img/vanessa-rochers-820.webp 820w, /happy-dog-apercu/assets/img/vanessa-rochers-1229.webp 1229w"
+           sizes="(max-width: 900px) 92vw, 34vw" width="820" height="1143" loading="lazy" decoding="async"
+           alt="Vanessa Vanlerberghe et Bahia sur les rochers du Golfe de Saint-Tropez, la photo de la couverture de son livre"></figure><!-- 18/11 : la photo de la couverture de son livre (demande de Vanessa) -->
     </div>
     <div class="livre__texte">
-      <p class="surtitre surtitre--clair">Auteure et conférencière</p>
+      <p class="surtitre surtitre--clair">Auteur et conférencière</p>
       <h2 id="livre-titre" class="titre-section titre-section--clair"><cite>Nos chiens, ces héros</cite></h2>
       <p class="livre__phrase">« Un chien n'arrive jamais par hasard dans une vie, dans une famille. <em>Jamais.</em> »</p>
       <p>Des nouvelles nées de séances bien réelles, où le chien devient tour à tour un miroir, un soutien, un catalyseur de changement. Un hommage à Samba et Bahia, et à toutes les rencontres humaines que les chiens ont placées sur ma route.</p>
