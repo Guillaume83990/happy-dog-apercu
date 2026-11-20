@@ -1,8 +1,15 @@
 {
   "actif": true,
   "_note": "EXEMPLE pour la démo. Ce fichier sera rempli par Vanessa depuis son espace privé (question, jeu concours ou offre du moment).",
-  "bouton": "Une question pour vous",
+  "bouton": "Et vous ?",
   "surtitre": "La question du mois",
   "titre": "Votre plus grand défi avec votre chien, en ce moment ?",
-  "choix": ["Les aboiements", "Le rappel", "La marche en laisse", "Quand je m'absente", "Autre chose"]
+  "choix": [
+    "Les aboiements",
+    "Le rappel",
+    "La marche en laisse",
+    "Quand je m'absente"
+  ],
+  "autre": "Autre",
+  "autreDetail": "En 3 mots"
 }

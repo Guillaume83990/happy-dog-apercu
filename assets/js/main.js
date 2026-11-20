@@ -7,14 +7,17 @@
   var calme = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var EN = doc.documentElement.lang === 'en';
   var T = EN ? {
-    ouvrir: 'Open the menu', fermer: 'Close the menu', ecouter: 'Listen to Vanessa', parle: 'Vanessa is speaking',
+    ouvrir: 'Open the menu', fermer: 'Close the menu', ecouter: 'In a few words…', parle: 'Vanessa is speaking',
     bientot: 'Her message is coming very soon', popup: '/happy-dog-apercu/assets/data/popup-en.json',
-    choisir: 'Please choose an answer.', email: 'This e-mail address looks incomplete.', accord: 'Please tick the box so that Vanessa can reply.'
+    choisir: 'Please choose an answer.', accord: 'Please tick the box so that Vanessa can contact you.',
+    wa: { bonjour: 'Hello Vanessa, here is my answer to the question on your website.', question: 'Question:', reponse: 'My answer:', prenom: 'First name:', chien: 'My dog:', tel: 'Phone:' }
   } : {
-    ouvrir: 'Ouvrir le menu', fermer: 'Fermer le menu', ecouter: 'Écouter Vanessa', parle: 'Vanessa vous parle',
+    ouvrir: 'Ouvrir le menu', fermer: 'Fermer le menu', ecouter: 'En quelques mots…', parle: 'Vanessa vous parle',
     bientot: 'Son message arrive très bientôt', popup: '/happy-dog-apercu/assets/data/popup.json',
-    choisir: 'Choisissez une réponse.', email: 'Cette adresse e-mail semble incomplète.', accord: 'Cochez la case pour que Vanessa puisse vous répondre.'
+    choisir: 'Choisissez une réponse.', accord: 'Cochez la case pour que Vanessa puisse vous recontacter.',
+    wa: { bonjour: 'Bonjour Vanessa, voici ma réponse à la question de votre site.', question: 'Question :', reponse: 'Ma réponse :', prenom: 'Prénom :', chien: 'Mon chien :', tel: 'Téléphone :' }
   };
+  var WHATSAPP = '33620708873'; // le numéro WhatsApp de Vanessa (le même que les boutons « Écrire sur WhatsApp »)
 
   /* ---------- En-tête qui se colle au défilement ---------- */
   var entete = $('[data-entete]');
@@ -104,29 +107,62 @@
         $('[data-popup-surtitre]', popup).textContent = d.surtitre;
         $('[data-popup-titre]', popup).textContent = d.titre;
         var choix = $('[data-popup-choix]', popup);
-        (d.choix || []).forEach(function (texte, i) {
+        var liste = (d.choix || []).slice();
+        if (d.autre) liste.push(d.autre); // 19/11 : « Autre », toujours en dernier, à détailler en 3 mots
+        liste.forEach(function (texte, i) {
           var l = doc.createElement('label');
           var e = doc.createElement('input');
           e.type = 'radio'; e.name = 'reponse'; e.value = texte; e.id = 'reponse-' + i;
+          if (d.autre && texte === d.autre) e.setAttribute('data-autre', '');
           l.appendChild(e); l.appendChild(doc.createTextNode(texte));
           choix.appendChild(l);
         });
+        if (d.autreDetail) $('[data-popup-autre] span', popup).textContent = d.autreDetail;
       })
       .catch(function () { /* sans contenu, la pop-up garde son texte par défaut */ });
 
     var form = $('[data-popup-form]', popup);
     var erreur = $('[data-popup-erreur]', popup);
+    // « Autre » coché : le champ « En 3 mots » apparaît et devient obligatoire
+    var autre = $('[data-popup-autre]', popup);
+    form.addEventListener('change', function (e) {
+      if (e.target.name !== 'reponse') return;
+      var oui = e.target.hasAttribute('data-autre');
+      autre.hidden = !oui; form.autre.required = oui;
+      if (oui) form.autre.focus();
+    });
+    // Messages du module de validation en anglais sur la version anglaise
+    if (EN && window.SWPValidation) {
+      var M = window.SWPValidation.messages;
+      M.requis = 'Please fill in this field.';
+      M.tel = 'Please enter a valid phone number (with +44, +1… if you are abroad).';
+      M.max = 'This text is a little long ({n} characters maximum).';
+      M.resume = function (n) { return n > 1 ? n + ' fields need correcting.' : 'One field needs correcting.'; };
+    }
+
+    /* 19/11 : la réponse part sur le WhatsApp de Vanessa, message déjà écrit (le visiteur n'a plus qu'à appuyer sur Envoyer).
+       Le module de validation (validation-formulaire.js) vérifie avant les champs texte et le téléphone. */
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var choisi = $('input[name="reponse"]:checked', form);
-      var email = form.email.value.trim();
       var msg = '';
       if ($$('input[name="reponse"]', form).length && !choisi) msg = T.choisir;
-      else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) msg = T.email;
       else if (!form.accord.checked) msg = T.accord;
       if (msg) { erreur.textContent = msg; erreur.hidden = false; return; }
       erreur.hidden = true;
-      /* APERÇU : l'envoi vers l'espace privé de Vanessa sera branché à la mise en ligne. Rien n'est envoyé ici. */
+      var reponse = choisi ? choisi.value : '';
+      if (choisi && choisi.hasAttribute('data-autre')) reponse += ' : ' + form.autre.value.trim();
+      var lignes = [
+        T.wa.bonjour,
+        T.wa.question + ' ' + $('[data-popup-titre]', popup).textContent.trim(),
+        T.wa.reponse + ' ' + reponse,
+        T.wa.prenom + ' ' + form.prenom.value.trim()
+      ];
+      if (form.chien.value.trim()) lignes.push(T.wa.chien + ' ' + form.chien.value.trim());
+      lignes.push(T.wa.tel + ' ' + form.tel.value.trim());
+      var lien = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(lignes.join('\n'));
+      $('[data-popup-whatsapp]', popup).href = lien; // secours si le navigateur bloque l'ouverture
+      window.open(lien, '_blank', 'noopener');
       form.hidden = true;
       $('[data-popup-merci]', popup).hidden = false;
     });
@@ -143,7 +179,7 @@
     ruban.classList.add('est-double');
   });
 
-  /* ---------- La voir travailler : 3 vidéos, chargées et lues seulement quand on les voit ---------- */
+  /* ---------- En images : 4 vidéos, chargées et lues seulement quand on les voit ---------- */
   var cartesVideo = $$('[data-video]');
   function etiquetteSon(bouton, actif) {
     bouton.setAttribute('aria-pressed', actif ? 'true' : 'false');
@@ -176,6 +212,7 @@
       entrees.forEach(function (e) {
         var video = $('video', e.target);
         if (e.isIntersecting) {
+          if (!video.getAttribute('data-src')) return; /* 19/11 : carte sans vidéo pour l'instant */
           if (!video.getAttribute('src')) { video.src = video.getAttribute('data-src'); video.load(); }
           if (!calme) video.play().catch(function () { /* vidéo pas encore arrivée */ });
         } else if (!video.paused) { video.pause(); }
@@ -275,4 +312,12 @@
   }
 
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', animer); else animer();
+})();
+
+/* 20/11 : page Auteur / Conférencier : un seul extrait du livre joue à la fois */
+(function () {
+  var films = Array.prototype.slice.call(document.querySelectorAll('[data-extrait]'));
+  films.forEach(function (f) {
+    f.addEventListener('play', function () { films.forEach(function (autre) { if (autre !== f && !autre.paused) autre.pause(); }); });
+  });
 })();

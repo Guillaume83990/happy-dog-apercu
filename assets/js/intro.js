@@ -108,7 +108,8 @@
       '<div class="intro__contenu">' +
         '<p class="intro__citation"><span>' + T.citation[0] + '</span> <span>' + T.citation[1] + '</span></p>' +
         '<p class="intro__jamais">' + T.jamais + '</p>' +
-        '<p class="intro__signe">Vanessa Vanlerberghe · <cite lang="fr">Nos chiens, ces héros</cite></p>' +
+        // 19/11 (retour de Vanessa) : plus de point entre son nom et le titre, le titre passe dessous
+        '<p class="intro__signe"><span class="intro__auteur">Vanessa Vanlerberghe</span><cite lang="fr">Nos chiens, ces héros</cite></p>' +
       '</div>' +
       // Puis son logo complet, celui qu'elle a validé (anneau « Nos chiens, ces héros / Vos chiens, ces héros »), en grand et lisible (17/11)
       '<img class="intro__logo" src="/happy-dog-apercu/assets/img/logo-happy-dog.svg" width="1395" height="1395" alt="">';
@@ -121,13 +122,16 @@
     tl = gsap.timeline({ onComplete: finir });
     // Rythme de lecture (demande de Guillaume, 16/11) : chaque ligne a le temps d'être lue, puis on laisse respirer
     // 17/11 : la phrase s'efface et laisse place au logo complet, puis le livre s'ouvre sur le site
-    var LOGO = 5.25, OUVRE = 7.3;
+    // 19/11 (retour de Vanessa) : intro rallongée de 8,7 s à 12,3 s pour avoir le temps de tout lire,
+    // la signature reste environ 3 s à l'écran avant que le logo arrive
+    var LOGO = 8.7, OUVRE = 10.9;
     gsap.set('.intro__logo', { opacity: 0, scale: .9 });
-    tl.from('.intro__citation span', { opacity: 0, y: 16, filter: 'blur(6px)', duration: 1.2, ease: 'power3.out',
+    tl.from('.intro__citation span', { opacity: 0, y: 16, filter: 'blur(6px)', duration: 1.3, ease: 'power3.out',
         // les deux pages portent la même phrase : chaque ligne apparaît en même temps à gauche et à droite
-        stagger: function (i, cible) { return Array.prototype.indexOf.call(cible.parentNode.children, cible) * 1.1; } }, .3)
-      .from('.intro__jamais', { opacity: 0, letterSpacing: '.35em', duration: 1.2, ease: 'power3.out' }, 2.9)
-      .from('.intro__signe', { opacity: 0, y: 8, duration: .9, ease: 'power2.out' }, 3.7)
+        stagger: function (i, cible) { return Array.prototype.indexOf.call(cible.parentNode.children, cible) * 1.6; } }, .4)
+      .from('.intro__jamais', { opacity: 0, letterSpacing: '.35em', duration: 1.3, ease: 'power3.out' }, 3.9)
+      .from('.intro__auteur', { opacity: 0, y: 8, duration: .9, ease: 'power2.out' }, 5)
+      .from('.intro__signe cite', { opacity: 0, y: 8, duration: .9, ease: 'power2.out' }, 5.6)
       .to('.intro__contenu', { opacity: 0, y: -10, filter: 'blur(4px)', duration: .7, ease: 'power2.in' }, LOGO - .35)
       .to('.intro__logo', { opacity: 1, scale: 1, duration: 1.1, ease: 'power3.out' }, LOGO)
       .call(sortie, null, OUVRE + .25)
