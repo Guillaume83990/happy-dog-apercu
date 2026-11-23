@@ -1,15 +1,19 @@
 {
+  "_note": "DÉMO seulement, utilisée tant que POPUP_SCRIPT est vide dans main.js. En ligne, le pop-up vient du tableau Google de Vanessa.",
   "actif": true,
-  "_note": "EXEMPLE pour la démo. Ce fichier sera rempli par Vanessa depuis son espace privé (question, jeu concours ou offre du moment).",
-  "bouton": "Et vous ?",
+  "mode": "question",
+  "bouton": "Et vous ?",
   "surtitre": "La question du mois",
   "titre": "Votre plus grand défi avec votre chien, en ce moment ?",
+  "texte": "",
   "choix": [
     "Les aboiements",
     "Le rappel",
     "La marche en laisse",
-    "Quand je m'absente"
+    "L’anxiété en absence"
   ],
-  "autre": "Autre",
-  "autreDetail": "En 3 mots"
+  "autre": true,
+  "fin": "",
+  "annonce": "",
+  "whatsapp": true
 }

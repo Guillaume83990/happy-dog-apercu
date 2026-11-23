@@ -138,6 +138,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   transition: background .35s var(--ease), transform .35s var(--ease);
 }
 .bouton-popup:hover { background: var(--cuivre); transform: translateY(-1px); }
+/* 22/11 : le bouton attend le pop-up du jour (tableau de Vanessa) avant d'apparaître, sans décaler l'en-tête ; caché s'il n'y a rien */
+.bouton-popup.est-en-attente { visibility: hidden; opacity: 0; }
+.bouton-popup { transition: background .35s var(--ease), transform .35s var(--ease), opacity .6s var(--ease); }
+.bouton-popup[hidden] { display: none; }
 /* 19/11 : le point blanc est retiré (retour de Vanessa) */
 @keyframes appel { 0% { box-shadow: 0 0 0 0 rgba(209, 154, 99, .55); } 70%, 100% { box-shadow: 0 0 0 12px rgba(209, 154, 99, 0); } }
 
@@ -313,9 +317,41 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .bulle-wa svg { width: 30px; height: 30px; fill: currentColor; }
 .barre-mobile { display: none; }
 
+/* ---------- Pages légales (22/11 : mentions, confidentialité, règlement des jeux ; outils/page-legales.cjs) ---------- */
+.legal { max-width: 820px; margin: 0 auto; padding: calc(var(--entete-h) + clamp(48px, 7vw, 96px)) var(--marge) clamp(72px, 9vw, 120px); }
+.legal__entete { margin-bottom: clamp(32px, 5vw, 56px); }
+.legal__intro { margin: 1.2em 0 0; max-width: 620px; color: var(--doux); font-size: 1.05em; }
+.legal__maj { margin: 1em 0 0; font-size: .78rem; color: var(--doux); letter-spacing: .02em; }
+.legal__sommaire { margin: 0 0 clamp(24px, 4vw, 40px); padding: 18px 22px; border: 1px solid var(--sable-2); border-radius: 16px; background: #fff; }
+.legal__sommaire ol { margin: 0; padding-left: 1.3em; columns: 2 220px; column-gap: 32px; font-size: .9rem; line-height: 1.9; }
+.legal__sommaire a { color: var(--espresso); text-decoration: none; border-bottom: 1px solid var(--sable-2); }
+.legal__sommaire a:hover { border-color: var(--cuivre); }
+.legal__section { padding-top: clamp(28px, 4vw, 44px); border-top: 1px solid var(--sable-2); margin-top: clamp(28px, 4vw, 44px); }
+.legal__section:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+.legal__section h2 { font-size: clamp(1.45rem, 2.4vw, 1.9rem); margin-bottom: .7em; }
+.legal__section h3 { font-size: 1.15rem; margin: 1.4em 0 .5em; }
+.legal__section p { margin: 0 0 1em; }
+.legal a { color: var(--cuivre-texte); text-underline-offset: 3px; }
+.legal__liste { margin: 0 0 1em; padding-left: 1.2em; }
+.legal__liste li { margin-bottom: .55em; }
+.legal__fiche { display: grid; grid-template-columns: minmax(150px, 220px) 1fr; gap: 10px 24px; margin: 0; }
+.legal__fiche dt { font-weight: 500; color: var(--espresso); }
+.legal__fiche dd { margin: 0; }
+.legal__voisins { margin-top: clamp(40px, 6vw, 64px); padding-top: 24px; border-top: 1px solid var(--sable-2); font-size: .88rem; color: var(--doux); }
+/* À compléter ou confirmer par Vanessa : bien visible dans l'aperçu, à retirer avant la mise en ligne */
+mark.a-completer { background: #FBEFD9; color: var(--espresso); border: 1px dashed var(--cuivre); border-radius: 6px; padding: .05em .4em; font-size: .9em; }
+@media (max-width: 600px) {
+  .legal__fiche { grid-template-columns: 1fr; gap: 2px; }
+  .legal__fiche dd { margin-bottom: 12px; }
+}
+
 /* ---------- CRM pop-up ---------- */
 .popup { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px; }
 .popup[hidden] { display: none; }
+.popup [hidden] { display: none !important; } /* 22/11 : les champs propres à chaque mode (jeu, offre) se cachent vraiment */
+.popup__texte { margin: -.4em 0 .9em; font-size: .95rem; line-height: 1.55; color: var(--espresso); }
+.popup__infos { margin: 0 0 1.1em; padding: 10px 14px; border-left: 2px solid var(--cuivre); background: #FBF6EE; font-size: .8rem; line-height: 1.5; color: var(--doux); }
+.popup__merci:focus { outline: none; }
 .popup__fond { position: absolute; inset: 0; background: rgba(36, 21, 15, .62); backdrop-filter: blur(4px); }
 .popup__boite { position: relative; width: min(100%, 470px); max-height: calc(100svh - 40px); overflow-y: auto; padding: 38px 34px 30px; background: var(--creme); border-radius: 24px; box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .6); }
 .popup__fermer { position: absolute; top: 12px; right: 12px; width: 42px; height: 42px; border: 0; border-radius: 50%; background: none; cursor: pointer; font-size: 1.7rem; line-height: 1; color: var(--espresso); }
@@ -468,6 +504,10 @@ html.intro-en-cours, html.intro-en-cours body { overflow: hidden; }
 .intro__signe cite { margin-top: .45em; }
 .intro--livre .intro__passer { color: var(--doux); }
 .intro--livre .intro__passer:hover { color: var(--espresso); }
+/* 23/11 : bouton « Musique » de l intro (essai « Je veux un chien »), à gauche, même style que « Passer l intro » */
+.intro__son { position: absolute; left: clamp(18px, 3vw, 40px); bottom: clamp(18px, 3vw, 36px); z-index: 5; background: none; border: 0; cursor: pointer;
+  font: 500 .72rem/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--doux); padding: 12px 4px; border-bottom: 1px solid rgba(209, 154, 99, .5); }
+.intro__son:hover, .intro__son[aria-pressed="true"] { color: var(--espresso); }
 
 /* 3. Le lien */
 .intro--lien { overflow: visible; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -656,6 +696,8 @@ html.lenis, html.lenis body { height: auto; }
 .carte--sombre h3, .carte--sombre .carte__lien { color: var(--espresso); }
 .carte--sombre p { color: var(--doux); }
 .carte--sombre .carte__num { color: var(--cuivre-texte); }
+/* 23/11 (Vanessa) : citation de la carte « Coaching en visio » */
+.carte .carte__citation { margin: 0 0 .6em; font: italic 400 1.05rem/1.45 var(--serif); color: var(--cuivre-texte); }
 
 /* 5. Ce qui vous amène */
 .sujets { background: var(--sable); color: var(--texte); }
@@ -785,7 +827,12 @@ html.lenis, html.lenis body { height: auto; }
 
 /* 19/11 (retours de Vanessa) : « Qui suis-je ? » avec son nom dessous. Le nom est posé sous l'intitulé
    sans le décaler : les 4 onglets (5 avec Podcasts plus tard) restent sur la même ligne. */
-.nav__qui small { position: absolute; left: 50%; top: calc(100% + 1px); transform: translateX(-50%); white-space: nowrap; font: italic 400 .8rem/1 var(--serif); letter-spacing: .02em; color: var(--cuivre-texte); }
+/* 23/11 (Vanessa) : son nom centré dans la largeur de l en-tête (sous « Auteur / Conférencier »), même hauteur qu avant */
+.nav { position: relative; }
+.nav .nav__qui { position: static; }
+.nav .nav__qui::after { display: none; } /* son soulignement suivrait sinon toute la barre */
+.nav .nav__qui:hover, .nav .nav__qui[aria-current="page"] { text-decoration: underline 1px var(--cuivre); text-underline-offset: 9px; }
+.nav__qui small { position: absolute; left: 50%; top: 39.5px; transform: translateX(-50%); white-space: nowrap; font: italic 400 .8rem/1 var(--serif); letter-spacing: .02em; color: var(--cuivre-texte); }
 .menu-mobile nav a.menu-mobile__qui small { display: block; margin-top: 4px; font: italic 400 1rem/1.2 var(--serif); color: var(--cuivre-texte); }
 
 /* 19/11 : bouton audio « En quelques mots… » : une seule ligne, même taille qu'avant (365 px) ;
@@ -1060,3 +1107,180 @@ html.lenis, html.lenis body { height: auto; }
 .pause--bande-rue .pause__image img { object-position: 50% 92%; }
 @media (max-width: 900px) { .pause--bande-rue .pause__image { aspect-ratio: auto; height: clamp(260px, 72vw, 560px); } }
 .etapes__photo img[src*="freya-herbe"] { object-position: 50% 45%; }
+
+/* ===== 21/11 · Page Auteur : « Ce que le chien révèle » (trois mots qui s'éclairent l'un après l'autre au défilement) ===== */
+.revele__intro { margin: 2.4em 0 0; font: 500 .74rem/1.4 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--cuivre-texte); }
+.revele { list-style: none; margin: 1em 0 2.4em; padding: 0; border-top: 1px solid var(--sable-2); }
+.revele li { padding: clamp(18px, 2.2vw, 26px) 0; border-bottom: 1px solid var(--sable-2); }
+.revele h3 { margin: 0; font: 400 clamp(1.75rem, 3.2vw, 2.6rem)/1.12 var(--serif); letter-spacing: -.015em; color: var(--espresso); }
+.revele h3 em { color: var(--cuivre-texte); }
+.revele p { margin: .45em 0 0; max-width: 520px; color: var(--doux); }
+
+/* ===== 21/11 · Page Auteur : extraits du livre, lus au rythme du défilement (les mots s'éclairent, une marge cuivre se trace) ===== */
+.lecture { background: var(--creme); padding: clamp(90px, 12vw, 160px) var(--marge); border-top: 1px solid var(--sable-2); }
+.lecture__entete { max-width: var(--max); margin: 0 auto clamp(60px, 8vw, 110px); }
+.lecture__intro { max-width: 560px; margin: 1em 0 0; color: var(--doux); }
+.lecture__liste { max-width: var(--max); margin: 0 auto; }
+.lecture__extrait { position: relative; max-width: 860px; margin: 0 0 clamp(80px, 10vw, 140px); padding-left: clamp(26px, 4vw, 60px); }
+.lecture__extrait:nth-child(2) { margin-left: auto; }
+.lecture__extrait:last-child { margin-bottom: 0; }
+.lecture__marge { position: absolute; left: 0; top: .3em; bottom: .3em; width: 1px; background: var(--cuivre); transform-origin: top center; }
+.lecture__nom { margin: 0 0 1.3em; font: 500 .74rem/1.4 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--cuivre-texte); }
+.lecture__extrait blockquote { margin: 0; }
+.lecture__extrait blockquote p { margin: 0 0 .65em; font: italic 400 clamp(1.35rem, 2.5vw, 2.1rem)/1.42 var(--serif); letter-spacing: -.005em; color: var(--espresso); }
+.lecture__extrait .mot { display: inline; }
+.js-anime .lecture__extrait .mot { opacity: .16; }
+.lecture__source { margin-top: 1.4em; font-size: .84rem; color: var(--doux); }
+@media (max-width: 900px) { .lecture__extrait:nth-child(2) { margin-left: 0; } }
+
+/* ===== 21/11 · Page Auteur : bloc d'achat, le livre « en objet » (photo de sa couverture + titre et mentions de la couverture) ===== */
+.livre-page { align-items: start; }
+.achat { position: sticky; top: calc(var(--entete-h) + 28px); text-align: center; }
+.livre-objet { perspective: 1600px; width: min(100%, 320px); margin: 0 auto clamp(26px, 3vw, 38px); }
+.livre-objet__couv { position: relative; aspect-ratio: 2195 / 3322; /* 23/11 : format de la vraie couverture */ transform: rotateY(-14deg); transform-origin: 20% 50%; border-radius: 2px 6px 6px 2px; overflow: hidden; background: var(--sable);
+  box-shadow: 26px 34px 50px -26px rgba(81, 56, 59, .55), 6px 8px 18px -8px rgba(81, 56, 59, .35); will-change: transform; }
+.livre-objet__couv img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.livre-objet__couv::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 7%; background: linear-gradient(90deg, rgba(46, 27, 19, .35), rgba(255, 255, 255, .18) 45%, rgba(46, 27, 19, 0)); pointer-events: none; }
+.livre-objet__auteur { position: absolute; top: 5.5%; left: 22%; right: 4%; text-align: center; font: 500 clamp(.7rem, 1.05vw, .92rem)/1.2 var(--sans); color: #4A3A35; }
+.livre-objet__auteur small { display: block; margin-top: .55em; font-size: .64em; font-weight: 400; letter-spacing: .04em; }
+.livre-objet__titre { position: absolute; top: 47%; right: 3.5%; text-align: right; font: 400 clamp(1.05rem, 1.9vw, 1.5rem)/1.04 var(--serif); text-transform: uppercase; letter-spacing: -.01em; color: #4A3A35; }
+.livre-objet__editions { position: absolute; bottom: 4.5%; left: 42%; right: 6%; text-align: center; font: 400 clamp(.48rem, .7vw, .6rem)/1.35 var(--sans); letter-spacing: .05em; color: #fff; }
+.achat__titre { margin: 0 0 .3em; font: 400 clamp(1.5rem, 2.4vw, 2rem)/1.2 var(--serif); color: var(--espresso); }
+.achat__details { margin: 0 0 1.4em; font-size: .84rem; color: var(--doux); }
+.achat__boutons { display: flex; flex-direction: column; gap: 10px; max-width: 300px; margin: 0 auto 1.5em; }
+.achat__boutons .bouton { justify-content: center; text-align: center; }
+.achat__lieux { margin: 0 0 1.1em; font-size: .9rem; color: var(--doux); }
+.achat__lieux b { display: block; font: 400 1.05rem/1.3 var(--serif); color: var(--espresso); }
+.lecture__suite { max-width: var(--max); margin: clamp(70px, 9vw, 120px) auto 0; text-align: center; }
+.lecture__suite p { margin: 0 0 1.1em; font: italic 400 clamp(1.2rem, 2vw, 1.55rem)/1.4 var(--serif); color: var(--espresso); }
+@media (max-width: 900px) { .achat { position: static; } .livre-objet { width: min(70%, 280px); } }
+
+/* ===== 21/11 · Page Coach en visio ===== */
+.ouverture--visio .ouverture__photo img { object-position: 50% 35%; }
+
+/* Ses 5 familles de sujets : une ligne cuivre se trace sous chaque sujet au défilement */
+.sujets-visio { padding: clamp(90px, 12vw, 150px) 0; }
+.sujets-visio__liste { list-style: none; max-width: var(--max); margin: 0 auto; padding: 0 var(--marge); }
+.sujets-visio__liste li { position: relative; display: grid; grid-template-columns: 60px minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(14px, 3vw, 48px); align-items: baseline; padding: clamp(22px, 2.6vw, 34px) 0; border-bottom: 1px solid var(--sable-2); }
+.sujets-visio__liste li::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%; background: var(--cuivre); transform: scaleX(var(--trait, 1)); transform-origin: left center; }
+.js-anime .sujets-visio__liste li::after { --trait: 0; }
+.sujets-visio__num { font: 500 .74rem/1 var(--sans); letter-spacing: .14em; color: var(--cuivre-texte); }
+.sujets-visio__liste h3 { margin: 0; font: 400 clamp(1.35rem, 2.3vw, 1.95rem)/1.2 var(--serif); color: var(--espresso); }
+.sujets-visio__liste p { margin: 0; color: var(--doux); }
+@media (max-width: 900px) { .sujets-visio__liste li { grid-template-columns: 44px minmax(0, 1fr); } .sujets-visio__liste p { grid-column: 2; } }
+
+/* Où que vous soyez : 4 horloges à l'heure réelle, reliées par un fil cuivre qui se trace au défilement */
+.horloges { background: var(--sable); padding: clamp(90px, 12vw, 150px) var(--marge); }
+.horloges__entete { max-width: var(--max); margin: 0 auto clamp(54px, 7vw, 90px); }
+.horloges__intro { max-width: 600px; margin: 1em 0 0; color: var(--doux); }
+.horloges__rangee { position: relative; max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.horloges__fil { position: absolute; left: 12.5%; right: 12.5%; top: 7px; height: 1px; background: var(--cuivre); transform-origin: left center; }
+.horloge { position: relative; text-align: center; }
+.horloge__point { display: block; width: 15px; height: 15px; margin: 0 auto 22px; border-radius: 50%; background: var(--sable); border: 1px solid var(--cuivre); position: relative; z-index: 1; transition: background .6s var(--ease); }
+.horloge.est-allumee .horloge__point { background: var(--cuivre); }
+.horloge__ville { margin: 0 0 .35em; font: 500 .74rem/1.4 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--cuivre-texte); }
+.horloge__heure { margin: 0; font: 400 clamp(2.2rem, 4.6vw, 3.9rem)/1 var(--serif); color: var(--espresso); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.horloges__note { max-width: var(--max); margin: 28px auto 0; text-align: center; font-size: .8rem; color: var(--doux); }
+@media (max-width: 700px) {
+  .horloges__rangee { grid-template-columns: repeat(2, 1fr); row-gap: 44px; }
+  .horloges__fil { display: none; }
+}
+
+/* Pourquoi elle : 4 faits, en grand */
+.atouts { padding: clamp(90px, 12vw, 150px) 0; border-top: 1px solid var(--sable-2); }
+.atouts__liste { list-style: none; max-width: var(--max); margin: 0 auto; padding: 0 var(--marge); display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(22px, 3vw, 44px); }
+.atouts__liste li { border-top: 1px solid var(--cuivre); padding-top: 22px; }
+.atouts__gros { display: block; margin-bottom: .45em; font: 400 clamp(1.7rem, 2.8vw, 2.5rem)/1.1 var(--serif); color: var(--espresso); }
+.atouts__liste span { color: var(--doux); font-size: .95rem; }
+.atouts__liste a { color: var(--espresso); text-decoration: none; border-bottom: 1px solid var(--cuivre); }
+
+/* ===== 21/11 · Page Qui suis-je ===== */
+.ouverture--qui .ouverture__photo img { object-position: 50% 42%; }
+@media (max-width: 900px) { .ouverture--qui .ouverture__photo img { object-position: 50% 40%; } }
+.lecture--village { background: var(--sable); border-top: 0; }
+
+/* Mon parcours : une frise verticale, le fil cuivre se trace et chaque étape s'éclaire quand il l'atteint */
+.parcours { padding: clamp(90px, 12vw, 150px) 0; }
+.parcours__frise { position: relative; max-width: 980px; margin: 0 auto; padding: 0 var(--marge); }
+.parcours__fil { position: absolute; top: 10px; bottom: 10px; left: calc(var(--marge) + 150px); width: 1px; background: var(--cuivre); transform-origin: top center; }
+.parcours__liste { list-style: none; margin: 0; padding: 0; }
+.parcours__etape { position: relative; display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 0 clamp(28px, 4vw, 56px); padding: 0 0 clamp(34px, 4vw, 52px); }
+.parcours__etape::before { content: ""; position: absolute; left: 150px; top: 9px; width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; background: var(--creme); border: 1px solid var(--cuivre); transition: background .5s var(--ease); }
+.parcours__etape.est-allumee::before { background: var(--cuivre); }
+.parcours__quand { padding-right: 22px; text-align: right; font: 400 clamp(1.05rem, 1.6vw, 1.3rem)/1.3 var(--serif); color: var(--cuivre-texte); }
+.parcours__etape h3 { margin: 0 0 .3em; font: 400 clamp(1.3rem, 2.1vw, 1.75rem)/1.2 var(--serif); color: var(--espresso); }
+.parcours__etape p { margin: 0; max-width: 560px; color: var(--doux); }
+.parcours__etape a { color: var(--espresso); text-decoration: none; border-bottom: 1px solid var(--cuivre); }
+.js-anime .parcours__etape > * { opacity: .25; transition: opacity .6s var(--ease); }
+.js-anime .parcours__etape.est-allumee > * { opacity: 1; }
+@media (max-width: 700px) {
+  .parcours__fil { left: calc(var(--marge) + 5px); }
+  .parcours__etape { grid-template-columns: minmax(0, 1fr); padding-left: 30px; }
+  .parcours__etape::before { left: 5px; }
+  .parcours__quand { text-align: left; padding: 0 0 .2em; }
+}
+
+/* Samba et Bahia */
+.chiens { padding: clamp(90px, 12vw, 150px) 0; }
+.chiens__duo { max-width: var(--max); margin: 0 auto; padding: 0 var(--marge); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(28px, 5vw, 80px); }
+.chiens__chien { border-top: 1px solid var(--cuivre); padding-top: 26px; }
+.chiens__chien h3 { margin: 0 0 .4em; font: 400 italic clamp(2.2rem, 4vw, 3.4rem)/1 var(--serif); color: var(--espresso); }
+.chiens__chien p { margin: 0; color: var(--texte); }
+
+/* Son rêve, sous sa vision */
+.methode__reve { margin: 1.8em 0 1em; font: italic 400 clamp(1.15rem, 1.7vw, 1.35rem)/1.45 var(--serif); color: var(--espresso); }
+
+/* ===== 21/11 · Page Où j'interviens ===== */
+.ouverture--zones .ouverture__photo img { object-position: 38% 45%; }
+@media (max-width: 900px) { .ouverture--zones .ouverture__photo img { object-position: 36% 40%; } }
+
+/* Les 12 communes : index à gauche (collant, la commune lue s'allume), un paragraphe par commune à droite */
+.communes { padding: clamp(90px, 12vw, 150px) 0; }
+.communes__grille { max-width: var(--max); margin: 0 auto; padding: 0 var(--marge); display: grid; grid-template-columns: minmax(200px, .38fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 120px); align-items: start; }
+.communes__index { position: sticky; top: calc(var(--entete-h) + 32px); }
+.communes__index ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--sable-2); }
+.communes__index a { position: relative; display: flex; gap: 14px; align-items: baseline; padding: 7px 0 7px 20px; font: 400 1.02rem/1.3 var(--serif); color: var(--doux); text-decoration: none; transition: color .5s var(--ease); }
+.communes__index a span { font: 500 .66rem/1 var(--sans); letter-spacing: .12em; color: var(--cuivre-texte); opacity: .6; transition: opacity .5s var(--ease); }
+.communes__index a::before { content: ""; position: absolute; left: -1px; top: 6px; bottom: 6px; width: 2px; background: var(--cuivre); transform: scaleY(0); transform-origin: center; transition: transform .5s var(--ease); }
+.communes__index a.est-active, .communes__index a:hover { color: var(--espresso); }
+.communes__index a.est-active span { opacity: 1; }
+.communes__index a.est-active::before { transform: scaleY(1); }
+.commune { padding: clamp(26px, 3vw, 38px) 0; border-top: 1px solid var(--sable-2); scroll-margin-top: calc(var(--entete-h) + 24px); }
+.commune:first-child { border-top: 0; padding-top: 0; }
+.commune h3 { margin: 0 0 .45em; font: 400 clamp(1.7rem, 3vw, 2.5rem)/1.1 var(--serif); letter-spacing: -.01em; color: var(--espresso); transition: color .5s var(--ease); }
+.commune p { margin: 0 0 1.1em; max-width: 640px; color: var(--texte); }
+.js-anime .commune > * { opacity: .5; transition: opacity .7s var(--ease); }
+.js-anime .commune.est-active > *, .js-anime .commune.est-lue > * { opacity: 1; }
+@media (max-width: 900px) {
+  .communes__grille { grid-template-columns: minmax(0, 1fr); }
+  .communes__index { display: none; }
+}
+
+/* Au-delà du Golfe */
+.au-dela { background: var(--sable); padding: clamp(90px, 12vw, 150px) 0; }
+.au-dela__duo { max-width: var(--max); margin: 0 auto; padding: 0 var(--marge); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(28px, 5vw, 80px); }
+.au-dela__bloc { border-top: 1px solid var(--cuivre); padding-top: 24px; }
+.au-dela__bloc h3 { margin: 0 0 .4em; font: 400 clamp(1.5rem, 2.4vw, 2rem)/1.2 var(--serif); color: var(--espresso); }
+.au-dela__bloc p { margin: 0 0 1.2em; color: var(--doux); }
+/* 22/11 : page Où j'interviens, la bande du port de Saint-Tropez (recadrée en 2:1 : les façades du quai en haut, la tête du chien entière) */
+.pause--bande-port .pause__image { height: auto; aspect-ratio: 2 / 1; } /* la bande a le format exact de la photo : rien n'est recoupé */
+.pause--bande-port .pause__image img { object-position: 50% 50%; }
+@media (max-width: 900px) { .pause--bande-port .pause__image { aspect-ratio: auto; height: clamp(260px, 72vw, 560px); } .pause--bande-port .pause__image img { object-position: 42% 60%; } }
+
+/* 23/11 (Vanessa) : crédit photo SOUS la photo, jamais écrit sur l'image */
+.credit-photo { margin: 0; padding: 10px var(--marge) 0; font: 400 .72rem/1.4 var(--sans); letter-spacing: .04em; color: var(--doux); text-align: right; }
+@media (min-width: 901px) {
+  .ouverture--credit { grid-template-rows: 1fr auto; }
+  .ouverture--credit .ouverture__texte { grid-row: 1 / span 2; }
+  .ouverture--credit .ouverture__photo { grid-column: 2; grid-row: 1; }
+  .ouverture--credit .credit-photo--ouverture { grid-column: 2; grid-row: 2; padding: 8px 18px 10px; text-align: left; } /* à gauche : la bulle WhatsApp occupe le coin droit */
+}
+@media (max-width: 900px) {
+  .ouverture--credit .credit-photo--ouverture { order: 2; padding: 0 var(--marge) 18px; }
+}
+/* 23/11 (Vanessa) : la vraie couverture du livre, à son format (aucun recadrage du titre), coins de livre */
+.livre__photo--couverture { border-radius: 6px; }
+.livre__photo--couverture img { display: block; height: auto; aspect-ratio: auto; object-fit: contain; }
+/* 23/11 : crédit sous la photo de la ruelle : la photo garde son cadre (effet au défilement), le crédit est sous le cadre */
+.vanessa__visuel { min-width: 0; }
+.credit-photo--figure { padding: 8px 2px 0; text-align: left; }

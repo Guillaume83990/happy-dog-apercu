@@ -187,7 +187,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path class="plein" transform="translate(2.6 2.6) scale(.78)" d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
         </a>
       </div>
-      <button type="button" class="bouton-popup" data-ouvrir-popup aria-haspopup="dialog">
+      <button type="button" class="bouton-popup est-en-attente" data-ouvrir-popup aria-haspopup="dialog">
         <span data-popup-etiquette>And you?</span>
       </button>
       <button type="button" class="burger" aria-label="Open the menu" aria-expanded="false" aria-controls="menu-mobile" data-burger><span></span><span></span></button>
@@ -238,7 +238,7 @@
 <main id="contenu">
 
   <!-- ========== 1. OPENING ========== -->
-  <section class="ouverture" aria-labelledby="titre-page">
+  <section class="ouverture ouverture--credit" aria-labelledby="titre-page">
     <div class="ouverture__texte">
       <h1 id="titre-page" class="ouverture__metier" data-apparition>Dog behaviourist &amp; trainer in Saint-Tropez<span class="ouverture__titres">Psychologist · Author · Speaker</span></h1>
       <p class="ouverture__accroche" data-titre-anime>A dog never comes into your life <em>by chance.</em></p>
@@ -271,6 +271,7 @@
            sizes="(max-width: 900px) 100vw, 64vw" width="1600" height="1067" fetchpriority="high"
            alt="Vanessa Vanlerberghe offering a treat to Bahia, her Australian Shepherd, on a boat in Saint-Tropez"><!-- 18/11 : la photo de son flyer, sa marque (demande de Vanessa) ; 19/11 : logos North Sails et Optimist effacés en local (Converse gardé, demande de Guillaume), photo entière gardée ; original : vanessa-flyer-*.webp -->
     </figure>
+    <p class="credit-photo credit-photo--ouverture">Photo: David Coppieters</p>
   </section>
 
   <!-- ========== 2. AT A GLANCE ========== -->
@@ -279,7 +280,7 @@
       <li><strong>5 out of 5 <span class="preuves__etoiles" aria-hidden="true">★★★★★</span></strong><span>106 Google reviews</span></li>
       <li><strong>Author</strong><span><cite lang="fr">Nos chiens, ces héros</cite></span></li>
       <li><strong>Online</strong><span>wherever you are</span></li>
-      <li><strong>At home</strong><span>then outdoors, in the 12 towns of the Gulf of Saint-Tropez</span></li>
+      <li><strong>At home</strong><span>then outdoors. In the 12 towns of the Gulf of Saint-Tropez</span></li>
     </ul>
   </section>
 
@@ -322,56 +323,57 @@
     <div class="travail__rangee" data-travail>
       <svg class="travail__fil" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path data-fil-travail d="M0 70 C 150 10, 260 120, 400 60 S 650 0, 800 60 S 1060 120, 1200 50"/></svg>
       <!-- 19/11 (retours de Vanessa) : 4 phases. Vidéos 1 à 3 provisoires (Vanessa et Bahia), la 4e à venir -->
-      <figure class="video" data-video data-sans-son>
+      <!-- 23/11 : la vraie vidéo de Vanessa « J'explique et je montre » (WeTransfer du 23/11), avec son audio de 17 s, bouton son actif -->
+      <figure class="video" data-video>
         <div class="video__cadre">
-          <video class="video__media" muted loop playsinline preload="none" data-src="/happy-dog-apercu/assets/video/vanessa-phase-1.mp4" aria-label="A client crouching at her dog's level."></video>
+          <video class="video__media" muted loop playsinline preload="none" data-src="/happy-dog-apercu/assets/video/vanessa-phase-1.mp4" aria-label="Vanessa explains a lead exercise, then shows it with her dog, in a Saint-Tropez lane."></video>
           <div class="video__attente" aria-hidden="true">
             <span class="video__lecture"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span>
             <p class="video__brief">Vanessa explains, then shows the move with her dog.</p>
-            <p class="video__bientot">Video coming soon</p>
+            
           </div>
           <button type="button" class="video__son" data-video-son aria-pressed="false" aria-label="Turn sound on"><svg class="video__icone-muet" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="trait" d="M16 9l5 6M21 9l-5 6"/></svg><svg class="video__icone-son" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="trait" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
         </div>
         <figcaption><span class="video__num">01</span><h3>A little theory</h3><p>I explain and I show you.</p></figcaption>
       </figure>
       
-      <figure class="video" data-video data-sans-son>
+      <!-- 23/11 : vraie vidéo de Vanessa (WeTransfer « livre vidéos », son gardé), bouton son actif -->
+      <figure class="video" data-video>
         <div class="video__cadre">
-          <video class="video__media" muted loop playsinline preload="none" data-src="/happy-dog-apercu/assets/video/vanessa-phase-2.mp4" aria-label="A client leaning towards his dog, a Rottweiler."></video>
+          <video class="video__media" muted loop playsinline preload="none" data-src="/happy-dog-apercu/assets/video/vanessa-phase-2.mp4" aria-label="One-to-one session at the port of Saint-Tropez: an owner and his Spitz work on waiting and recall."></video>
           <div class="video__attente" aria-hidden="true">
             <span class="video__lecture"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span>
             <p class="video__brief">The owner tries, Vanessa guides and corrects.</p>
-            <p class="video__bientot">Video coming soon</p>
           </div>
           <button type="button" class="video__son" data-video-son aria-pressed="false" aria-label="Turn sound on"><svg class="video__icone-muet" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="trait" d="M16 9l5 6M21 9l-5 6"/></svg><svg class="video__icone-son" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="trait" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
         </div>
         <figcaption><span class="video__num">02</span><h3>Individual practice, your turn</h3><p>I guide you, I correct you.</p></figcaption>
       </figure>
       
-      <figure class="video" data-video data-sans-son>
+      <!-- 23/11 : vraie vidéo de Vanessa (WeTransfer « livre vidéos », son gardé), bouton son actif -->
+      <figure class="video" data-video>
         <div class="video__cadre">
-          <video class="video__media" muted loop playsinline preload="none" data-src="/happy-dog-apercu/assets/video/vanessa-phase-3.mp4" aria-label="As a group: several dogs and their humans, Saint-Tropez in the distance."></video>
+          <video class="video__media" muted loop playsinline preload="none" data-src="/happy-dog-apercu/assets/video/vanessa-phase-3.mp4" aria-label="Group session: owners and dogs practise lead walking together on a path in the Gulf."></video>
           <div class="video__attente" aria-hidden="true">
             <span class="video__lecture"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span>
             <p class="video__brief">Several dogs and their humans: recall, as a group.</p>
-            <p class="video__bientot">Video coming soon</p>
           </div>
           <button type="button" class="video__son" data-video-son aria-pressed="false" aria-label="Turn sound on"><svg class="video__icone-muet" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="trait" d="M16 9l5 6M21 9l-5 6"/></svg><svg class="video__icone-son" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="trait" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
         </div>
-        <figcaption><span class="video__num">03</span><h3>Your turn, as a group</h3><p>Anxiety, selection and logistics, dog and human: we work on the group, with a focus on recall and channelling energy.</p></figcaption>
+        <figcaption><span class="video__num">03</span><h3>Your turn, as a group</h3><p>Organisation, selection and logistics, dogs and humans. Group work, obedience and focus.</p></figcaption>
       </figure>
       
-      <figure class="video" data-video data-sans-son>
+      <!-- 23/11 : vraie vidéo de Vanessa (WeTransfer « livre vidéos », son gardé), bouton son actif -->
+      <figure class="video" data-video>
         <div class="video__cadre">
-          <video class="video__media" muted loop playsinline preload="none" data-src="/happy-dog-apercu/assets/video/vanessa-phase-4.mp4" aria-label="A relaxed moment on a terrace, with a dog."></video>
+          <video class="video__media" muted loop playsinline preload="none" data-src="/happy-dog-apercu/assets/video/vanessa-phase-4.mp4" aria-label="The group’s dogs lying calmly on the beach, filmed during the session: the videos sent after each session."></video>
           <div class="video__attente" aria-hidden="true">
             <span class="video__lecture"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span>
             <p class="video__brief">After the session, her feedback and the videos arrive on your phone.</p>
-            <p class="video__bientot">Video coming soon</p>
           </div>
           <button type="button" class="video__son" data-video-son aria-pressed="false" aria-label="Turn sound on"><svg class="video__icone-muet" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="trait" d="M16 9l5 6M21 9l-5 6"/></svg><svg class="video__icone-son" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="trait" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
         </div>
-        <figcaption><span class="video__num">04</span><h3>Feedback</h3><p>I send you my feedback on WhatsApp, along with all the videos.</p></figcaption>
+        <figcaption><span class="video__num">04</span><h3>Feedback</h3><p>After each session, I send you the feedback and all the day's videos on WhatsApp.</p></figcaption>
       </figure>
     </div>
     <p class="travail__glisser" aria-hidden="true">Swipe →</p>
@@ -388,25 +390,26 @@
       <a class="carte" href="/happy-dog-apercu/en/dog-behaviourist-saint-tropez/" data-apparition>
         <span class="carte__num">01</span>
         <h3>Dog behaviourist</h3>
-        <p>Barking, reactivity, fears, running off, chewing, anxiety when you leave: first we understand, then we change things together.</p>
+        <p>Barking, fears, hypersensitivity, hyper-reactivity, running off, destructive behaviour, separation anxiety, OCD, stealing, pica, resource guarding, reactivity, aggression towards other dogs, aggression towards people… First we understand, then we change things together.</p>
         <span class="carte__lien">Understanding behaviour</span>
       </a>
       <a class="carte" href="/happy-dog-apercu/en/puppy-training-saint-tropez/" data-apparition>
         <span class="carte__num">02</span>
         <h3>Puppy training</h3>
-        <p>House training, nipping, recall, first outings: the right foundations from the day they arrive, and a strong bond for life.</p>
-        <span class="carte__lien">The right start</span>
+        <p>House training, nipping, first outings, first encounters, starting lead walking, starting off-lead heelwork and recall: the right foundations from the day they arrive, and a strong bond for life.</p>
+        <span class="carte__lien">Building mutual trust</span>
       </a>
       <a class="carte" href="/happy-dog-apercu/en/dog-walking-home-dog-sitting/" data-apparition>
         <span class="carte__num">03</span>
         <h3>Walks &amp; dog sitting at home</h3>
-        <p>Training walks, one-to-one or in a group, and dog sitting in your own home, anywhere in the Gulf.</p>
+        <p>Training walks, one-to-one or in a group. While you are away, dog sitting in your own home in Saint-Tropez, Ramatuelle and Gassin.</p>
         <span class="carte__lien">Walks &amp; dog sitting</span>
       </a>
-      <a class="carte carte--sombre" href="/happy-dog-apercu/en/online-dog-behaviour-consultation/" data-apparition>
+      <a class="carte" href="/happy-dog-apercu/en/online-dog-behaviour-consultation/" data-apparition>
         <span class="carte__num">04</span>
         <h3>Online coaching</h3>
-        <p>From your home, in France or abroad, in English or in French, with your dog by your side in its own environment.</p>
+        <p class="carte__citation">“At the end of a lead, there is always a human.”</p>
+        <p>From your home, in France or abroad, in English or in French, with your dog by your side in your own environment.</p>
         <span class="carte__lien">Online coaching</span>
       </a>
     </div>
@@ -425,11 +428,11 @@
       <h2 id="sujets-titre" class="titre-section titre-section--clair">Every dog has <em>a story.</em><br>So do you.</h2>
     </div>
     <ol class="sujets__liste">
-      <li data-apparition><span>01</span><div><h3>When my dog is a problem</h3><p>Aggression, reactivity, chewing, barking, separation anxiety, fear, recall…</p></div></li>
-      <li data-apparition><span>02</span><div><h3>When my dog is just like me</h3><p>Our emotions, our habits, our tensions, the way we communicate…</p></div></li>
-      <li data-apparition><span>03</span><div><h3>Dogs with a past</h3><p>Abandonment, adoption, mistreatment, rebuilding, trust regained…</p></div></li>
+      <li data-apparition><span>01</span><div><h3>When my dog is a problem</h3><p>Aggression, reactivity, destructive behaviour, excessive barking, separation anxiety, fears, phobias, running off, OCD, stealing, jumping up, hyperactivity…</p></div></li>
+      <li data-apparition><span>02</span><div><h3>When my dog is just like me</h3><p>Our emotions, our habits, our tensions, our traumas, the way we communicate…</p></div></li>
+      <li data-apparition><span>03</span><div><h3>My dog and its past</h3><p>Adopted dogs, abandoned dogs, mistreatment, street dogs, border crossings, dogs that have been attacked or injured…</p></div></li>
       <li data-apparition><span>04</span><div><h3>The dog's place in the family</h3><p>Children, teenagers, separation, ageing, grief, a new baby…</p></div></li>
-      <li data-apparition><span>05</span><div><h3>Dogs that change our lives</h3><p>Emotional support, hypersensitivity, mirror effects, loneliness and rebuilding…</p></div></li>
+      <li data-apparition><span>05</span><div><h3>Dogs that change our lives</h3><p>Emotional support, hypersensitivity, soothing, rebuilding, trust regained, getting active and social again…</p></div></li>
     </ol>
   </section>
 
@@ -439,6 +442,7 @@
     <figure class="pause__image" data-apparition>
       <img src="/happy-dog-apercu/assets/img/bande-course-1200.webp" srcset="/happy-dog-apercu/assets/img/bande-course-1200.webp 1200w, /happy-dog-apercu/assets/img/bande-course-2400.webp 2400w" sizes="100vw" width="2400" height="1600" loading="lazy" decoding="async" alt="An Australian Shepherd running towards us on a scrubland path, tongue out">
     </figure>
+    <p class="credit-photo">Photo: David Coppieters</p>
   </section>
 
   <!-- ========== 6. REVIEWS ========== -->
@@ -456,8 +460,8 @@
         <figcaption><b>Gérard</b> · Google review, translated from French</figcaption>
       </figure>
       <figure class="avis__carte" data-apparition>
-        <blockquote><p>Vanessa is an excellent dog trainer: professional, patient and kind. Thanks to her valuable advice, our little Dachshund makes progress at every session. We are delighted with her support and recommend her without hesitation. Thank you Vanessa!</p></blockquote>
-        <figcaption><b>Caroline</b> · Google review, translated from French</figcaption>
+        <blockquote><p>Vanessa was wonderful, with our dog as much as with us. She listens, she is committed, attentive and has great intuition. Her approach to training is completely tailor-made, in real situations, which is extremely rare in this field. We can vouch for it: in four years, we consulted many trainers all over France without ever finding anyone who took so much time to truly understand our dog.</p><p>We are convinced that every dog is unique, with its own personality and its traumas, and that you cannot apply one universal method to all of them. Vanessa embodies exactly that vision. She is passionate, human, professional, and always looking for the right solutions. A real gem in the world of dog training. Thank you, Vanessa</p></blockquote>
+        <figcaption><b>Jack</b> · Google review, translated from French</figcaption>
       </figure>
       <figure class="avis__carte" data-apparition>
         <blockquote><p>At the end of August we adopted a little dog originally from Romania. She refused to go out in the evening, and even during the day we sometimes had to carry her to start the walks, even though we have a little 12-year-old dog who is always happy to go out. We were lucky to have training sessions with Vanessa quickly; she pays close attention to each dog’s particular needs. We followed her advice and the improvement was quick. I sincerely thank Vanessa for giving us the keys to make Nala happy (and for bringing us more peace of mind, too). I recommend Vanessa for her patience and kindness towards dogs and their humans.</p></blockquote>
@@ -481,8 +485,8 @@
   <section class="zones" aria-labelledby="zones-titre">
     <div class="zones__texte">
       <p class="surtitre">Where I work</p>
-      <h2 id="zones-titre" class="titre-section">Dog trainer at your home, <em>across the Gulf</em></h2>
-      <p>I come to your home first, where your dog lives, then to all the places of your daily life. Elsewhere in the Var on request, and anywhere in the world online.</p>
+      <h2 id="zones-titre" class="titre-section">Dog trainer at your home, <em>across the Gulf of Saint-Tropez</em></h2>
+      <p>I first come to your home, your dog's own “territory”. Then each session takes place somewhere different, arranged in advance, so that your companion feels at ease in every situation and every environment.</p>
       <a class="lien-fleche" href="/happy-dog-apercu/en/dog-trainer-french-riviera/">All the towns</a>
     </div>
     <ul class="zones__communes" aria-label="The 12 towns of the Gulf of Saint-Tropez">
@@ -496,27 +500,29 @@
   <!-- ========== 8. AUTHOR & SPEAKER ========== -->
   <section class="livre" aria-labelledby="livre-titre">
     <div class="livre__visuel" data-livre>
-      <figure class="livre__photo"><img src="/happy-dog-apercu/assets/img/vanessa-rochers-820.webp"
-           srcset="/happy-dog-apercu/assets/img/vanessa-rochers-520.webp 520w, /happy-dog-apercu/assets/img/vanessa-rochers-820.webp 820w, /happy-dog-apercu/assets/img/vanessa-rochers-1229.webp 1229w"
-           sizes="(max-width: 900px) 92vw, 34vw" width="820" height="1143" loading="lazy" decoding="async"
-           alt="Vanessa Vanlerberghe and Bahia on the rocks of the Gulf of Saint-Tropez, the photo from her book cover"></figure><!-- 18/11 : la photo de la couverture de son livre (demande de Vanessa) -->
+      <figure class="livre__photo livre__photo--couverture"><img src="/happy-dog-apercu/assets/img/livre-couverture-820.webp"
+           srcset="/happy-dog-apercu/assets/img/livre-couverture-520.webp 520w, /happy-dog-apercu/assets/img/livre-couverture-820.webp 820w, /happy-dog-apercu/assets/img/livre-couverture-1229.webp 1229w"
+           sizes="(max-width: 900px) 92vw, 34vw" width="820" height="1242" loading="lazy" decoding="async"
+           alt="Cover of Vanessa Vanlerberghe's book “Nos chiens, ces héros”: Vanessa and Bahia on the rocks of the Gulf of Saint-Tropez"></figure><!-- 23/11 (Vanessa) : la vraie couverture du livre (PDF Amazon du 23/11, face avant, vraies couleurs) -->
     </div>
     <div class="livre__texte">
       <p class="surtitre surtitre--clair">Author &amp; speaker</p>
       <h2 id="livre-titre" class="titre-section titre-section--clair"><cite lang="fr">Nos chiens, ces héros</cite></h2>
       <p class="livre__phrase">"A dog never comes into a life, into a family, by chance. <em>Never.</em>"</p>
       <p>Short stories born from real sessions, where the dog becomes in turn a mirror, a support, a catalyst for change. A tribute to Samba and Bahia, and to every human encounter dogs have brought my way.</p>
-      <p class="livre__infos">Short stories, in French · 184 pages · available in the Gulf: tourist office, newsagents, bookshops</p>
       <a class="bouton bouton--cuivre" href="/happy-dog-apercu/en/talks-and-book/">The book &amp; talks</a>
     </div>
   </section>
 
   <!-- ========== 9. ABOUT ME ========== -->
   <section class="vanessa" aria-labelledby="vanessa-titre">
+    <div class="vanessa__visuel">
     <figure class="vanessa__photo" data-apparition>
       <img src="/happy-dog-apercu/assets/img/vanessa-ruelle-537.webp" srcset="/happy-dog-apercu/assets/img/vanessa-ruelle-537.webp 537w, /happy-dog-apercu/assets/img/vanessa-ruelle-1074.webp 1074w" sizes="(max-width: 900px) 100vw, 46vw" width="537" height="433" loading="lazy" decoding="async"
            alt="Vanessa and Bahia, her Australian Shepherd, in a Saint-Tropez lane">
     </figure>
+    <p class="credit-photo credit-photo--figure">Photo: Cyril Brenière</p>
+    </div>
     <div class="vanessa__texte">
       <p class="surtitre">About me</p>
       <h2 id="vanessa-titre" class="titre-section">Vanessa <em>Vanlerberghe</em></h2>
@@ -577,7 +583,7 @@
     </div>
   </div>
   <p class="pied__bas">
-    <span>© 2026 Happy Dog Saint-Tropez · <a href="/happy-dog-apercu/mentions-legales/" hreflang="fr">Legal notice</a> · <a href="/happy-dog-apercu/confidentialite/" hreflang="fr">Privacy</a> · <a href="/happy-dog-apercu/reglement-jeux-concours/" hreflang="fr">Giveaway rules</a></span>
+    <span>© 2026 Happy Dog Saint-Tropez · <a href="/happy-dog-apercu/en/legal-notice/">Legal notice</a> · <a href="/happy-dog-apercu/en/privacy/">Privacy</a> · <a href="/happy-dog-apercu/en/giveaway-rules/">Giveaway rules</a></span>
     <span>Website by <a href="https://www.sudwebproject.com/">Sud Web Project</a></span>
   </p>
 </footer>
@@ -591,42 +597,46 @@
   <a href="https://wa.me/33620708873" class="barre-mobile__wa">WhatsApp</a>
 </nav>
 
-<!-- ========== CRM POP-UP (content managed by Vanessa from her private space; demo example here) ========== -->
-<div class="popup" data-popup hidden>
+<!-- ========== CRM POP-UP (22/11: content read from Vanessa's Google Sheet, 3 modes: question, giveaway, special offer; see outils/popup-google/) ========== -->
+<div class="popup" data-popup data-mode="question" hidden>
   <div class="popup__fond" data-fermer-popup></div>
   <div class="popup__boite" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="popup-titre">
     <button type="button" class="popup__fermer" data-fermer-popup aria-label="Close">×</button>
-    <!-- 19/11 (retours de Vanessa) : son nom comme dans l'en-tête ; « Autre » à détailler en 3 mots ; prénom, chien, téléphone (pas d'e-mail) ; la réponse part sur son WhatsApp -->
     <div class="popup__marque">
       <img class="popup__scene" src="/happy-dog-apercu/assets/img/logo-scene.svg" width="742" height="537" alt="" loading="lazy">
       <p class="marque__texte"><span class="marque__nom">HAPPY DOG</span><span class="marque__lieu">Saint-Tropez</span></p>
     </div>
     <p class="surtitre" data-popup-surtitre>Question of the month</p>
     <h2 id="popup-titre" class="popup__titre" data-popup-titre>Your biggest challenge with your dog right now?</h2>
+    <p class="popup__texte" data-popup-texte hidden></p>
+    <p class="popup__infos" data-popup-infos hidden></p>
     <form class="popup__form" data-popup-form data-valider data-conteneur=".champ" novalidate>
       <fieldset class="popup__choix" data-popup-choix>
         <legend class="visuellement-cache">Your answer</legend>
       </fieldset>
-      <label class="champ popup__autre" data-popup-autre hidden><span>In 3 words</span><input type="text" name="autre" maxlength="40" autocomplete="off"></label>
+      <label class="champ popup__autre" data-popup-autre hidden><span data-popup-autre-etiquette>In 3 words</span><input type="text" name="autre" maxlength="40" autocomplete="off" data-message-requis="Please write your answer."></label>
       <label class="champ"><span>Your first name</span><input type="text" name="prenom" autocomplete="given-name" maxlength="60" required data-message-requis="Please enter your first name."></label>
       <label class="champ"><span>Your dog (name, age, breed)</span><input type="text" name="chien" autocomplete="off" maxlength="80" required data-message-requis="Please give your dog’s name, age and breed."></label>
       <label class="champ"><span>Your phone number</span><input type="tel" name="tel" autocomplete="tel" inputmode="tel" maxlength="20" required data-message-requis="Please enter your number so that Vanessa can call you back."></label>
-      <label class="case"><input type="checkbox" name="accord" required> <span>I agree that Vanessa may contact me by phone or WhatsApp. My details are never shared (<a href="/happy-dog-apercu/confidentialite/" hreflang="fr">privacy</a>).</span></label>
+      <label class="champ" data-seulement="jeu" hidden><span>Your Instagram account (optional, to tag you if you win)</span><input type="text" name="instagram" autocomplete="off" maxlength="40" placeholder="@"></label>
+      <label class="case" data-sauf="jeu"><input type="checkbox" name="accord"> <span>I agree that Vanessa may contact me by phone or WhatsApp. My details are never shared (<a href="/happy-dog-apercu/en/privacy/">privacy</a>).</span></label>
+      <label class="case" data-seulement="jeu" hidden><input type="checkbox" name="reglement"> <span>I have read the <a href="/happy-dog-apercu/en/giveaway-rules/">giveaway rules</a> (free, no purchase necessary). Vanessa will contact me if I win.</span></label>
+      <label class="case" data-seulement="jeu" hidden><input type="checkbox" name="nouvelles"> <span>Optional: I would also like to hear from Vanessa (tips, next giveaways). My details are never shared (<a href="/happy-dog-apercu/en/privacy/">privacy</a>).</span></label>
       <p class="popup__erreur" data-popup-erreur role="alert" hidden></p>
-      <button type="submit" class="bouton bouton--cuivre bouton--plein">Send on WhatsApp</button>
-      <p class="popup__note">Your answer opens in WhatsApp, ready to send to Vanessa.</p>
+      <button type="submit" class="bouton bouton--cuivre bouton--plein" data-popup-envoyer>Send my answer</button>
+      <p class="popup__note" data-popup-note>Your answer goes straight to Vanessa.</p>
     </form>
-    <div class="popup__merci" data-popup-merci hidden>
+    <div class="popup__merci" data-popup-merci hidden tabindex="-1">
       <h3>Thank you!</h3>
-      <p>Your message is ready in WhatsApp: just press Send. Vanessa will get back to you personally.</p>
-      <a class="bouton bouton--cuivre" data-popup-whatsapp href="https://wa.me/33620708873" target="_blank" rel="noopener">Open WhatsApp</a>
+      <p data-popup-merci-texte>Vanessa has received your answer and will get back to you personally.</p>
+      <a class="bouton bouton--cuivre" data-popup-whatsapp href="https://wa.me/33620708873" target="_blank" rel="noopener">Also message Vanessa on WhatsApp</a>
     </div>
   </div>
 </div>
 
 <script>
 (function(){
-  var faites=["/happy-dog-apercu/","/happy-dog-apercu/en/","/happy-dog-apercu/conferences-livre-nos-chiens-ces-heros/","/happy-dog-apercu/en/talks-and-book/","/happy-dog-apercu/education-reeducation-chien-saint-tropez/","/happy-dog-apercu/en/dog-training-retraining-saint-tropez/","/happy-dog-apercu/education-chiot-saint-tropez/","/happy-dog-apercu/en/puppy-training-saint-tropez/","/happy-dog-apercu/comportementaliste-canin-saint-tropez/","/happy-dog-apercu/en/dog-behaviourist-saint-tropez/","/happy-dog-apercu/balade-garde-chien-domicile-saint-tropez/","/happy-dog-apercu/en/dog-walking-home-dog-sitting/"];
+  var faites=["/happy-dog-apercu/","/happy-dog-apercu/en/","/happy-dog-apercu/conferences-livre-nos-chiens-ces-heros/","/happy-dog-apercu/en/talks-and-book/","/happy-dog-apercu/education-reeducation-chien-saint-tropez/","/happy-dog-apercu/en/dog-training-retraining-saint-tropez/","/happy-dog-apercu/education-chiot-saint-tropez/","/happy-dog-apercu/en/puppy-training-saint-tropez/","/happy-dog-apercu/comportementaliste-canin-saint-tropez/","/happy-dog-apercu/en/dog-behaviourist-saint-tropez/","/happy-dog-apercu/balade-garde-chien-domicile-saint-tropez/","/happy-dog-apercu/en/dog-walking-home-dog-sitting/","/happy-dog-apercu/coaching-canin-visio/","/happy-dog-apercu/en/online-dog-behaviour-consultation/","/happy-dog-apercu/vanessa-educatrice-comportementaliste-canine/","/happy-dog-apercu/en/about-vanessa/","/happy-dog-apercu/educatrice-canine-golfe-saint-tropez/","/happy-dog-apercu/en/dog-trainer-french-riviera/","/happy-dog-apercu/mentions-legales/","/happy-dog-apercu/en/legal-notice/","/happy-dog-apercu/confidentialite/","/happy-dog-apercu/en/privacy/","/happy-dog-apercu/reglement-jeux-concours/","/happy-dog-apercu/en/giveaway-rules/"];
   var en=document.documentElement.lang==='en';
   var bulle;
   function annoncer(){

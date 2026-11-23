@@ -1,15 +1,19 @@
 {
+  "_note": "DEMO only, used while POPUP_SCRIPT is empty in main.js. Online, the pop-up comes from Vanessa’s Google Sheet.",
   "actif": true,
-  "_note": "EXAMPLE for the demo. Vanessa will fill this file from her private space (question, giveaway or current offer).",
+  "mode": "question",
   "bouton": "And you?",
   "surtitre": "Question of the month",
   "titre": "Your biggest challenge with your dog right now?",
+  "texte": "",
   "choix": [
     "Barking",
     "Recall",
     "Walking on the lead",
-    "When I leave the house"
+    "Anxiety when left alone"
   ],
-  "autre": "Other",
-  "autreDetail": "In 3 words"
+  "autre": true,
+  "fin": "",
+  "annonce": "",
+  "whatsapp": true
 }

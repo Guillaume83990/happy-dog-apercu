@@ -63,6 +63,35 @@
   });
   doc.addEventListener('keydown', function (e) { if (e.key === 'Escape') passer.click(); });
 
+  // 23/11 (demande de Vanessa) : ESSAI de la musique « Je veux un chien » (Alexis HK) pendant l'introduction « Le livre ».
+  // Accord écrit de l'artiste à recevoir avant toute mise en ligne. Les navigateurs bloquent un son qui démarre seul :
+  // on essaie, et sinon le bouton « Musique » la lance, calée sur l'animation (fondu à l'ouverture du livre).
+  // Interrupteur : vide = intro sans musique ni bouton (l'aperçu en ligne le vide tant que l'accord écrit d'Alexis HK n'est pas reçu)
+  var MUSIQUE = ''; // aperçu : pas de musique (accord écrit de l'artiste à recevoir)
+  var musique = new Audio(MUSIQUE || undefined);
+  musique.preload = 'auto';
+  var son = doc.createElement('button');
+  son.type = 'button'; son.className = 'intro__son';
+  function etatSon(actif) {
+    son.setAttribute('aria-pressed', actif ? 'true' : 'false');
+    son.textContent = actif ? (EN ? '♪ Music off' : '♪ Couper la musique') : (EN ? '♪ Music' : '♪ Musique');
+  }
+  etatSon(false);
+  function lancerMusique(depart) {
+    try { musique.currentTime = Math.max(0, Math.min(depart, 12)); } catch (e) { /* pas encore chargée */ }
+    musique.volume = 1;
+    return musique.play().then(function () { etatSon(true); });
+  }
+  function arreterMusique() {
+    if (musique.paused) return;
+    gsap.to(musique, { volume: 0, duration: .6, onComplete: function () { musique.pause(); etatSon(false); } });
+  }
+  son.addEventListener('click', function () {
+    if (musique.paused) lancerMusique(tl ? tl.time() : 0).catch(function () { /* refusé */ });
+    else { musique.pause(); etatSon(false); }
+  });
+  passer.addEventListener('click', arreterMusique);
+
   function lettres(texte) {
     return texte.split('').map(function (c) { return '<span class="intro__lettre">' + (c === ' ' ? '&nbsp;' : c) + '</span>'; }).join('');
   }
@@ -118,8 +147,21 @@
       '<div class="intro__page intro__page--d">' + contenu + '</div>' +
       '<span class="intro__pli" aria-hidden="true"></span>';
     el.appendChild(passer);
+    if (MUSIQUE) el.appendChild(son);
 
     tl = gsap.timeline({ onComplete: finir });
+    // 23/11 (Guillaume) : la musique part dès l'ouverture ; « ♪ Couper la musique » l'arrête.
+    // Si le navigateur bloque le son (fréquent à la 1re visite), elle part au premier toucher ou clic sur l'intro.
+    (MUSIQUE ? lancerMusique(0) : Promise.resolve()).catch(function () {
+      function premierGeste(e) {
+        if (e.key === 'Escape' || (e.target.closest && e.target.closest('.intro__passer, .intro__son'))) return;
+        el.removeEventListener('pointerdown', premierGeste);
+        doc.removeEventListener('keydown', premierGeste);
+        if (!termine && musique.paused) lancerMusique(tl ? tl.time() : 0).catch(function () { /* toujours refusé */ });
+      }
+      el.addEventListener('pointerdown', premierGeste);
+      doc.addEventListener('keydown', premierGeste);
+    });
     // Rythme de lecture (demande de Guillaume, 16/11) : chaque ligne a le temps d'être lue, puis on laisse respirer
     // 17/11 : la phrase s'efface et laisse place au logo complet, puis le livre s'ouvre sur le site
     // 19/11 (retour de Vanessa) : intro rallongée de 8,7 s à 12,3 s pour avoir le temps de tout lire,
@@ -138,7 +180,7 @@
       .to('.intro__pli', { opacity: 0, duration: .6 }, LOGO) // le pli ne coupe pas le logo en deux
       .to('.intro__page--g', { xPercent: -100, rotationY: 18, transformOrigin: '0% 50%', duration: 1.4, ease: 'power3.inOut' }, OUVRE)
       .to('.intro__page--d', { xPercent: 100, rotationY: -18, transformOrigin: '100% 50%', duration: 1.4, ease: 'power3.inOut' }, OUVRE)
-      .to(passer, { opacity: 0, duration: .3 }, OUVRE);
+      .to([passer, son], { opacity: 0, duration: .3 }, OUVRE);
   }
 
   /* ---------- 3. Le lien ---------- */
