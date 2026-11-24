@@ -1268,12 +1268,13 @@ html.lenis, html.lenis body { height: auto; }
 @media (max-width: 900px) { .pause--bande-port .pause__image { aspect-ratio: auto; height: clamp(260px, 72vw, 560px); } .pause--bande-port .pause__image img { object-position: 42% 60%; } }
 
 /* 23/11 (Vanessa) : crédit photo SOUS la photo, jamais écrit sur l'image */
-.credit-photo { margin: 0; padding: 10px var(--marge) 0; font: 400 .72rem/1.4 var(--sans); letter-spacing: .04em; color: var(--doux); text-align: right; }
+.credit-photo { margin: 0; padding: 8px 0 0; font: 400 .72rem/1.4 var(--sans); letter-spacing: .04em; color: var(--doux); text-align: left; } /* 24/11 (Guillaume) : tous les crédits à gauche, au ras du bord gauche de la photo */
+.pause > .credit-photo { padding: 8px 14px 0; } /* 24/11 : photo pleine largeur : le crédit colle au coin bas gauche de la photo (14 px du bord de l écran, sinon il toucherait le bord) */
 @media (min-width: 901px) {
   .ouverture--credit { grid-template-rows: 1fr auto; }
   .ouverture--credit .ouverture__texte { grid-row: 1 / span 2; }
   .ouverture--credit .ouverture__photo { grid-column: 2; grid-row: 1; }
-  .ouverture--credit .credit-photo--ouverture { grid-column: 2; grid-row: 2; padding: 8px 18px 10px; text-align: left; } /* à gauche : la bulle WhatsApp occupe le coin droit */
+  .ouverture--credit .credit-photo--ouverture { grid-column: 2; grid-row: 2; padding: 8px 0 10px; text-align: left; } /* à gauche : la bulle WhatsApp occupe le coin droit */
 }
 @media (max-width: 900px) {
   .ouverture--credit .credit-photo--ouverture { order: 2; padding: 0 var(--marge) 18px; }
@@ -1283,4 +1284,30 @@ html.lenis, html.lenis body { height: auto; }
 .livre__photo--couverture img { display: block; height: auto; aspect-ratio: auto; object-fit: contain; }
 /* 23/11 : crédit sous la photo de la ruelle : la photo garde son cadre (effet au défilement), le crédit est sous le cadre */
 .vanessa__visuel { min-width: 0; }
-.credit-photo--figure { padding: 8px 2px 0; text-align: left; }
+.credit-photo--figure { padding: 8px 0 0; text-align: left; }
+
+/* 24/11 (Vanessa) : En images, plus de lecture automatique : un bouton lecture sur chaque vidéo, une seule joue à la fois */
+.video__cadre { cursor: pointer; }
+.video__jouer { position: absolute; inset: 0; z-index: 1; display: none; place-items: center; padding: 0; border: 0; background: rgba(46, 27, 19, .16); cursor: pointer; transition: opacity .35s var(--ease), background .35s var(--ease); }
+.video.est-prete .video__jouer { display: grid; }
+.video.en-lecture .video__jouer { opacity: 0; pointer-events: none; }
+.video__jouer:hover, .video__jouer:focus-visible { background: rgba(46, 27, 19, .06); }
+.video__jouer .video__lecture { background: rgba(46, 27, 19, .5); border-color: rgba(247, 242, 232, .85); }
+.video__jouer .video__lecture svg { fill: #F7F2E8; }
+.video__jouer:focus-visible { outline: 2px solid var(--cuivre-clair); outline-offset: -4px; }
+
+/* 24/11 (Guillaume) : les 4 cartes de l'accueil alignées entre elles : numéros, titres, textes et boutons sur les mêmes lignes
+   (chaque carte suit les 4 rangées de la grille : numéro / titre / texte / bouton) */
+@supports (grid-template-rows: subgrid) {
+  .cartes--alignees .carte { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; min-height: 0; }
+  .cartes--alignees .carte__num { margin-bottom: 0; }
+  .cartes--alignees .carte__lien { margin-top: 0; align-self: start; } /* la 1re ligne de chaque bouton sur la même ligne */
+}
+
+/* 24/11 (Guillaume) : En images, les 4 vidéos en rangée nette : plus d'escalier ni de décalage au défilement (elles mordaient sur le titre),
+   et une taille qui tient dans l'écran : la vidéo ET son texte se voient en entier, sans défiler */
+@media (min-width: 901px) {
+  .travail__rangee { justify-items: center; }
+  .travail__rangee .video { margin-top: 0; width: 100%; max-width: calc(min(58vh, 520px) * 9 / 16); }
+  .travail__fil { top: 34%; }
+}

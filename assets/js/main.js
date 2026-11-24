@@ -295,43 +295,73 @@
     ruban.classList.add('est-double');
   });
 
-  /* ---------- En images : 4 vidéos, chargées et lues seulement quand on les voit ---------- */
+  /* ---------- En images : 4 vidéos. 24/11 (Vanessa) : plus de lecture automatique.
+     Chaque vidéo démarre avec SON bouton lecture, avec le son ; lancer une vidéo arrête les autres :
+     une seule joue à la fois. Hors de l'écran, elle se met en pause. ---------- */
   var cartesVideo = $$('[data-video]');
   function etiquetteSon(bouton, actif) {
+    if (!bouton) return;
     bouton.setAttribute('aria-pressed', actif ? 'true' : 'false');
     bouton.setAttribute('aria-label', actif ? (EN ? 'Turn sound off' : 'Couper le son') : (EN ? 'Turn sound on' : 'Activer le son'));
   }
-  function couperLesAutres(garde) {
+  function arreterLesAutres(garde) {
     cartesVideo.forEach(function (c) {
       var v = $('video', c);
-      if (c !== garde && v && !v.muted) { v.muted = true; etiquetteSon($('[data-video-son]', c), false); }
+      if (c !== garde && v && !v.paused) v.pause();
     });
+  }
+  function charger(video) {
+    var source = video.getAttribute('data-src');
+    if (!source || video.getAttribute('src')) return;
+    video.preload = 'metadata';
+    video.src = source + '#t=0.001'; /* la première image s'affiche, rien ne joue */
+    video.load();
   }
   cartesVideo.forEach(function (carte) {
     var video = $('video', carte);
-    var bouton = $('[data-video-son]', carte);
+    var son = $('[data-video-son]', carte);
+    var cadre = $('.video__cadre', carte);
+    video.loop = false;
+    video.removeAttribute('loop');
+    /* bouton lecture posé sur la vidéo (même rond que l'attente) */
+    var jouer = document.createElement('button');
+    jouer.type = 'button';
+    jouer.className = 'video__jouer';
+    jouer.setAttribute('aria-label', EN ? 'Play the video' : 'Lire la vidéo');
+    var rond = $('.video__lecture', carte);
+    if (rond) jouer.appendChild(rond.cloneNode(true));
+    cadre.appendChild(jouer);
+    function lancer() {
+      if (!video.getAttribute('data-src')) return; /* carte sans vidéo */
+      charger(video);
+      arreterLesAutres(carte);
+      video.muted = false;
+      etiquetteSon(son, true);
+      video.play().catch(function () {
+        video.muted = true; etiquetteSon(son, false);
+        video.play().catch(function () {});
+      });
+    }
     video.addEventListener('loadeddata', function () { carte.classList.add('est-prete'); });
-    bouton.addEventListener('click', function () {
-      var activer = video.muted;
-      if (activer) couperLesAutres(carte);
-      video.muted = !activer;
-      if (activer && video.paused) video.play().catch(function () {});
-      etiquetteSon(bouton, activer);
-    });
-    if (calme) carte.addEventListener('click', function (e) {
+    video.addEventListener('play', function () { carte.classList.add('en-lecture'); });
+    video.addEventListener('pause', function () { carte.classList.remove('en-lecture'); });
+    video.addEventListener('ended', function () { carte.classList.remove('en-lecture'); video.currentTime = 0; });
+    cadre.addEventListener('click', function (e) {
       if (e.target.closest('[data-video-son]')) return;
-      if (video.paused) video.play().catch(function () {}); else video.pause();
+      if (video.paused) lancer(); else video.pause();
+    });
+    if (son) son.addEventListener('click', function () {
+      if (video.paused) { lancer(); return; }
+      video.muted = !video.muted;
+      etiquetteSon(son, !video.muted);
     });
   });
   if (cartesVideo.length && 'IntersectionObserver' in window) {
     var observateur = new IntersectionObserver(function (entrees) {
       entrees.forEach(function (e) {
         var video = $('video', e.target);
-        if (e.isIntersecting) {
-          if (!video.getAttribute('data-src')) return; /* 19/11 : carte sans vidéo pour l'instant */
-          if (!video.getAttribute('src')) { video.src = video.getAttribute('data-src'); video.load(); }
-          if (!calme) video.play().catch(function () { /* vidéo pas encore arrivée */ });
-        } else if (!video.paused) { video.pause(); }
+        if (e.isIntersecting) charger(video); /* on prépare la première image, sans lancer */
+        else if (!video.paused) video.pause();
       });
     }, { rootMargin: '200px 0px' });
     cartesVideo.forEach(function (c) { observateur.observe(c); });
@@ -375,13 +405,10 @@
       gsap.to(fil, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '.trio', start: 'top 85%', end: 'top 35%', scrub: true } });
     }
 
-    // La voir travailler : les cadres montent en escalier, le fil cuivre les relie, chacun à sa vitesse
+    // En images : les 4 vidéos apparaissent en montant, puis restent alignées ; le fil cuivre les relie
     if ($('[data-travail]') && window.matchMedia('(min-width: 901px)').matches) {
       gsap.from('.video', { y: 140, opacity: 0, duration: 1.2, stagger: .18, ease: 'power3.out', scrollTrigger: { trigger: '[data-travail]', start: 'top 82%' } });
-      [-40, -110, -60].forEach(function (y, i) {
-        var c = $$('.video .video__cadre')[i];
-        if (c) gsap.to(c, { y: y, ease: 'none', scrollTrigger: { trigger: '[data-travail]', start: 'top bottom', end: 'bottom top', scrub: true } });
-      });
+      /* 24/11 (Guillaume) : plus de décalage des vidéos au défilement : elles mordaient sur le titre et sur leurs textes */
       var filT = $('[data-fil-travail]');
       if (filT && filT.getTotalLength) {
         var lt = filT.getTotalLength();

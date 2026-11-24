@@ -124,6 +124,44 @@
     });
   }
 
+  /* ---------- 24/11 (Vanessa : « plus vivant ») : plus de rythme, sans rien changer à la mise en page ----------
+     Tout ce qui arrivait d'un bloc (paragraphes, boutons, photos, crédits) arrive maintenant en cascade, juste après son titre.
+     Seulement ce qui n'a pas déjà sa propre animation (on ne double jamais un effet). */
+  function dejaAnime(el) {
+    for (var e = el; e && e !== doc.body; e = e.parentElement) { if (gsap.getTweensOf(e).length) return true; }
+    return false;
+  }
+  // Grandes photos pleine largeur : elles s'agrandissent au défilement, du cadre arrondi jusqu'à toute la largeur
+  $$('.pause__image').forEach(function (fig) {
+    var img = $('img', fig);
+    gsap.fromTo(fig, { clipPath: grandEcran ? 'inset(0% 9% 0% 9% round 28px)' : 'inset(0% 5% 0% 5% round 20px)' },
+      { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none', scrollTrigger: { trigger: fig, start: 'top 95%', end: 'center 55%', scrub: .6 } });
+    if (img) gsap.fromTo(img, { scale: 1.18 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: .6 } });
+  });
+  // Photos des pages (couverture du livre, photos des étapes…) : dévoilées par un rideau, comme la photo de Vanessa
+  $$('main section:not(.ouverture) figure').forEach(function (fig) {
+    var img = $('img', fig);
+    if (!img || dejaAnime(fig) || fig.closest('.video') || fig.classList.contains('lecture__extrait')) return;
+    var rayon = getComputedStyle(fig).borderTopLeftRadius || '0px';
+    gsap.fromTo(fig, { clipPath: 'inset(100% 0% 0% 0% round ' + rayon + ')' }, { clipPath: 'inset(0% 0% 0% 0% round ' + rayon + ')', duration: 1.4, ease: 'power4.inOut', scrollTrigger: { trigger: fig, start: 'top 85%' } });
+    gsap.fromTo(img, { scale: 1.2 }, { scale: 1, duration: 1.8, ease: 'power3.out', scrollTrigger: { trigger: fig, start: 'top 85%' } });
+  });
+  // Textes et boutons : chaque section déroule son contenu dans l'ordre de lecture, après son titre
+  $$('main section:not(.ouverture)').forEach(function (section) {
+    var els = $$('p, blockquote, .bouton', section).filter(function (el) {
+      if (el.closest('.titre-section, .surtitre, .ruban, [data-apparition], .video, .lecture__extrait, nav, form, .popup')) return false;
+      if (el.classList.contains('surtitre') || el.classList.contains('travail__glisser')) return false;
+      if (el.parentElement && el.parentElement.closest('.bouton')) return false;
+      return !dejaAnime(el) && el.offsetParent !== null;
+    });
+    els.forEach(function (el, i) {
+      var bouton = el.classList.contains('bouton');
+      var credit = el.classList.contains('credit-photo');
+      gsap.from(el, { opacity: 0, y: credit ? 0 : (bouton ? 14 : 26), duration: credit ? 1 : .95, delay: credit ? .6 : Math.min(i, 5) * .07, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 90%' } });
+    });
+  });
+
   // Les polices et images changent les hauteurs : on recalcule une fois tout chargé
   window.addEventListener('load', function () { ST.refresh(); });
 })();
