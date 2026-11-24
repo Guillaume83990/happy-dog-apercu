@@ -67,7 +67,7 @@
   // Accord écrit de l'artiste à recevoir avant toute mise en ligne. Les navigateurs bloquent un son qui démarre seul :
   // on essaie, et sinon le bouton « Musique » la lance, calée sur l'animation (fondu à l'ouverture du livre).
   // Interrupteur : vide = intro sans musique ni bouton (l'aperçu en ligne le vide tant que l'accord écrit d'Alexis HK n'est pas reçu)
-  var MUSIQUE = ''; // aperçu : pas de musique (accord écrit de l'artiste à recevoir)
+  var MUSIQUE = '/happy-dog-apercu/assets/audio/intro-je-veux-un-chien.mp3';
   var musique = new Audio(MUSIQUE || undefined);
   musique.preload = 'auto';
   var son = doc.createElement('button');
