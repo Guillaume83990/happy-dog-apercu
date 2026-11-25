@@ -1054,6 +1054,10 @@ html.lenis, html.lenis body { height: auto; }
   .methode__points li { grid-template-columns: 1fr; gap: 4px; }
   .avis__grille--deux { grid-template-columns: 1fr; }
 }
+/* 25/11 (Vanessa) : avis complets de même hauteur, signatures alignées sur la même ligne, grille centrée */
+.avis__grille--egales { align-items: stretch; justify-content: center; }
+.avis__grille--egales .avis__carte { display: flex; flex-direction: column; }
+.avis__grille--egales .avis__carte blockquote { flex: 1 1 auto; }
 /* téléphone : les 8 problèmes sur 2 colonnes (moins long à faire défiler), Bahia visible sur la photo */
 @media (max-width: 600px) {
   .cartes--quatre { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -1070,7 +1074,8 @@ html.lenis, html.lenis body { height: auto; }
 .ouverture--balades .ouverture__photo img { object-position: 50% 50%; }
 .cartes--deux { grid-template-columns: repeat(2, 1fr); max-width: 1100px; }
 .carte--service { padding: clamp(28px, 3vw, 44px); }
-.carte--service h3 { font-size: clamp(1.6rem, 2.4vw, 2.1rem); margin-top: 28px; }
+.carte--service h3 { font-size: clamp(1.45rem, 2vw, 1.8rem); margin-top: 28px; } /* 25/11 (Vanessa) : les 2 titres sur une ligne, au même niveau */
+.carte--service .carte__num { margin-bottom: 0; } /* 25/11 : contenu calé en haut, les titres restent au même niveau quelle que soit la largeur */
 .carte--service p { font-size: 1rem; color: var(--texte); }
 .carte--service ul { list-style: none; margin: 1.2em 0 0; padding: 0; }
 .carte--service li { padding: 10px 0 10px 22px; border-top: 1px solid var(--sable-2); position: relative; font-size: .92rem; color: var(--espresso); }
@@ -1311,3 +1316,13 @@ html.lenis, html.lenis body { height: auto; }
   .travail__rangee .video { margin-top: 0; width: 100%; max-width: calc(min(58vh, 520px) * 9 / 16); }
   .travail__fil { top: 34%; }
 }
+
+/* 25/11 (Vanessa : « on se perd sur le site ») : fil d'Ariane visible en haut de chaque page intérieure, aligné sur le texte de l'ouverture */
+.fil-ariane { padding: calc(var(--entete-h) + 14px) var(--marge) 12px; background: var(--creme); font: 400 .78rem/1.5 var(--sans); letter-spacing: .03em; color: var(--doux); }
+.fil-ariane ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 8px; }
+.fil-ariane li + li::before { content: "›"; margin-right: 8px; color: var(--cuivre); }
+.fil-ariane a { color: inherit; text-decoration: none; }
+.fil-ariane a:hover, .fil-ariane a:focus-visible { color: var(--cuivre-texte); text-decoration: underline; }
+.fil-ariane [aria-current="page"] { color: var(--espresso); font-weight: 500; }
+.fil-ariane + .ouverture { padding-top: 0; }
+.fil-ariane + .legal { padding-top: clamp(32px, 5vw, 64px); }
