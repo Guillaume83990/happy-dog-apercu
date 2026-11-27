@@ -58,6 +58,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .surtitre--clair { color: var(--cuivre-clair); }
 .titre-section { font-size: clamp(2.1rem, 4.4vw, 3.8rem); }
 .titre-section em { color: var(--cuivre-texte); }
+.titre-section--long { font-size: clamp(1.45rem, 2.6vw, 2.3rem); line-height: 1.25; } /* 27/11 : titre-phrase long (page Auteur, « Je suis témoin… ») */
 .titre-section--clair { color: var(--creme); }
 .titre-section--clair em { color: var(--cuivre-clair); }
 .entete-section { max-width: var(--max); margin: 0 auto clamp(44px, 6vw, 84px); padding: 0 var(--marge); }
@@ -173,6 +174,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .ouverture__accroche { font: 400 clamp(2.6rem, min(5.8vw, 9.2vh), 6rem)/1.02 var(--serif); letter-spacing: -.025em; color: var(--creme); margin: 0 0 .4em; }
 .ouverture__accroche em { color: var(--cuivre-clair); }
 .ouverture__intro { max-width: 580px; font-size: 1.06em; color: var(--creme-doux); margin-bottom: 1.6em; }
+.ouverture__citation { margin: 0 0 1em; font: italic 400 clamp(1.5rem, 2vw, 1.85rem)/1.3 var(--serif); color: var(--cuivre); } /* 27/11 (Vanessa) : sa citation en ocre (taille de grand texte : contraste suffisant) */
 .ouverture__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; margin-bottom: 1.4em; }
 .ouverture__note { font-size: .88rem; color: var(--creme-doux); margin: 0; }
 .ouverture__note strong { color: var(--creme); font-weight: 500; }
@@ -423,6 +425,7 @@ body.popup-ouverte { overflow: hidden; }
   .ouverture__texte { position: relative; z-index: 1; margin-top: -96px; padding: 0 var(--marge) 56px; }
   .ouverture__metier { order: 0; margin-bottom: .9em; }
   .ouverture__accroche { order: 1; }
+  .ouverture__citation { order: 1; }
   .ouverture__note { order: 2; margin: 0 0 1.1em; }
   .ouverture__actions { order: 3; margin-bottom: 1.6em; }
   .ouverture__intro { order: 4; margin-bottom: 0; }
@@ -727,6 +730,7 @@ html.lenis, html.lenis body { height: auto; }
 .question__titre { color: var(--espresso); }
 .question__titre em { color: var(--cuivre); }
 .question__intro { color: var(--texte); }
+.question .surtitre { font-size: .95rem; margin-bottom: 1.1em; } /* 27/11 (Vanessa) : « M'inviter » trop petit ; même taille sur toutes les pages */
 
 /* Pied de page : prune, comme le bandeau de son flyer (son logo y reste) */
 .pied { background: var(--espresso); color: rgba(250, 248, 242, .78); }
@@ -1011,6 +1015,15 @@ html.lenis, html.lenis body { height: auto; }
 .carte--fixe p { margin: 0; }
 .consignes__lien { max-width: var(--max); margin: clamp(26px, 3vw, 40px) auto 0; padding: 0 var(--marge); color: var(--texte); }
 .consignes__lien a { color: var(--espresso); border-bottom: 1px solid var(--cuivre); text-decoration: none; padding-bottom: 2px; }
+/* 27/11 (Vanessa) : page Chiot, les 6 consignes en liste numérotée compacte (les grandes cartes étaient trop vides) */
+.consignes__grille { list-style: none; max-width: var(--max); margin: 0 auto; padding: 0 var(--marge); display: grid; grid-template-columns: repeat(3, 1fr); column-gap: clamp(24px, 3.5vw, 56px); counter-reset: none; }
+.consignes__grille li { display: flex; align-items: baseline; gap: 16px; padding: 20px 0 22px; border-top: 1px solid var(--sable-2); }
+.consignes__grille li:nth-child(-n+3) { border-top-color: var(--cuivre); }
+.consignes__num { flex: none; min-width: 1.6em; font: 400 .95rem/1 var(--serif); color: var(--cuivre-texte); }
+.consignes__grille h3 { margin: 0; font: 400 clamp(1.08rem, 1.45vw, 1.28rem)/1.35 var(--serif); color: var(--espresso); }
+.consignes__grille p { margin: .3em 0 0; font-size: .92rem; color: var(--doux); }
+@media (max-width: 900px) { .consignes__grille { grid-template-columns: repeat(2, 1fr); } .consignes__grille li:nth-child(3) { border-top-color: var(--sable-2); } }
+@media (max-width: 560px) { .consignes__grille { grid-template-columns: 1fr; } .consignes__grille li { padding: 16px 0 17px; } .consignes__grille li:nth-child(2) { border-top-color: var(--sable-2); } }
 /* l'avis à la une : une colonne large, se lit d'un coup d'œil */
 .avis-une { max-width: 980px; margin: 0 auto; padding: clamp(30px, 4vw, 52px); background: #fff; border: 1px solid var(--sable-2); border-radius: 24px; }
 .avis-une blockquote { margin: 0 0 1.3em; font: italic 400 clamp(1rem, 1.25vw, 1.12rem)/1.62 var(--serif); color: var(--espresso); }
@@ -1152,8 +1165,9 @@ html.lenis, html.lenis body { height: auto; }
 .livre-objet__editions { position: absolute; bottom: 4.5%; left: 42%; right: 6%; text-align: center; font: 400 clamp(.48rem, .7vw, .6rem)/1.35 var(--sans); letter-spacing: .05em; color: #fff; }
 .achat__titre { margin: 0 0 .3em; font: 400 clamp(1.5rem, 2.4vw, 2rem)/1.2 var(--serif); color: var(--espresso); }
 .achat__details { margin: 0 0 1.4em; font-size: .84rem; color: var(--doux); }
-.achat__boutons { display: flex; flex-direction: column; gap: 10px; max-width: 300px; margin: 0 auto 1.5em; }
+.achat__boutons { display: flex; flex-direction: column; gap: 10px; max-width: 340px; margin: 0 auto 1.5em; } /* 27/11 : 300 → 340 px, « Commander auprès de Vanessa » sur une ligne */
 .achat__boutons .bouton { justify-content: center; text-align: center; }
+.achat__note { margin: -2px 0 8px; font-size: .84rem; font-style: italic; color: var(--doux); } /* 27/11 (Vanessa) : petite ligne sous chaque bouton d'achat */
 .achat__lieux { margin: 0 0 1.1em; font-size: .9rem; color: var(--doux); }
 .achat__lieux b { display: block; font: 400 1.05rem/1.3 var(--serif); color: var(--espresso); }
 .lecture__suite { max-width: var(--max); margin: clamp(70px, 9vw, 120px) auto 0; text-align: center; }
@@ -1162,6 +1176,7 @@ html.lenis, html.lenis body { height: auto; }
 
 /* ===== 21/11 · Page Coach en visio ===== */
 .ouverture--visio .ouverture__photo img { object-position: 50% 35%; }
+.ouverture--visio .ouverture__accroche { font-size: clamp(2.1rem, min(3.6vw, 6.2vh), 3.6rem); line-height: 1.08; } /* 27/11 : accroche plus longue (texte de Vanessa) */
 
 /* Ses 5 familles de sujets : une ligne cuivre se trace sous chaque sujet au défilement */
 .sujets-visio { padding: clamp(90px, 12vw, 150px) 0; }
@@ -1198,6 +1213,10 @@ html.lenis, html.lenis body { height: auto; }
 .atouts__gros { display: block; margin-bottom: .45em; font: 400 clamp(1.7rem, 2.8vw, 2.5rem)/1.1 var(--serif); color: var(--espresso); }
 .atouts__liste span { color: var(--doux); font-size: .95rem; }
 .atouts__liste a { color: var(--espresso); text-decoration: none; border-bottom: 1px solid var(--cuivre); }
+/* 27/11 (Vanessa) : page Coach en visio, son parcours en pastilles + ses accompagnants */
+.atouts .seances { margin-top: clamp(30px, 4vw, 48px); }
+@media (max-width: 700px) { .atouts .seances__liste li { border-radius: 16px; font-size: .9rem; } } /* pastilles sur plusieurs lignes : coins adoucis */
+.atouts__accompagnants { max-width: 820px; margin: clamp(26px, 3vw, 36px) 0 0; font: italic 400 clamp(1.02rem, 1.4vw, 1.18rem)/1.6 var(--serif); color: var(--espresso); }
 
 /* ===== 21/11 · Page Qui suis-je ===== */
 .ouverture--qui .ouverture__photo img { object-position: 50% 42%; }
@@ -1283,6 +1302,18 @@ html.lenis, html.lenis body { height: auto; }
 }
 @media (max-width: 900px) {
   .ouverture--credit .credit-photo--ouverture { order: 2; padding: 0 var(--marge) 18px; }
+}
+/* 27/11 (Vanessa) : sa citation en ocre SOUS la photo d'ouverture (page Coach en visio) */
+.ouverture--citation .ouverture__citation { margin: 0; text-align: center; }
+@media (min-width: 901px) {
+  .ouverture--citation { grid-template-rows: 1fr auto; }
+  .ouverture--citation .ouverture__texte { grid-row: 1 / span 2; }
+  .ouverture--citation .ouverture__photo { grid-column: 2; grid-row: 1; }
+  .ouverture--citation .ouverture__citation { grid-column: 2; grid-row: 2; padding: 22px var(--marge) 26px; }
+}
+@media (max-width: 900px) {
+  .ouverture--citation .ouverture__citation { order: -1; padding: 18px var(--marge) 6px; }
+  .ouverture--citation .ouverture__texte { margin-top: 0; padding-top: 18px; }
 }
 /* 23/11 (Vanessa) : la vraie couverture du livre, à son format (aucun recadrage du titre), coins de livre */
 .livre__photo--couverture { border-radius: 6px; }
